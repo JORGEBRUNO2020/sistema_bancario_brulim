@@ -1,0 +1,8 @@
+insert into cliente (id, nombre, apellido, dni, telefono, email, nombre_usuario, password)
+values(1,'Jose', 'Argento', '22356545', '24945555555', 'j_argento@gmail.com', 'us1', 'pas1'),
+(2, 'Carlos', 'Menem', '8474547', '0115554477', 'elcarlo@gmail.com', 'us2', 'pas2'),
+(3, 'Mirtha', 'Legrand', '00000001', '01111111110', 'lachiqui@gmail.com', 'us3', 'pas3'),
+(4, 'Nestor', 'Ch....', '10111222', '0116564522', 'el_nestor@gmail.com', 'us4', 'pas4'),
+(5, 'Diego', 'Maradona', '16233255', '011784784', 'el_diego@gmail.com', 'us5', 'pas5')
+
+
