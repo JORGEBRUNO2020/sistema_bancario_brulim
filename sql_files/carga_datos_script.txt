@@ -1,0 +1,36 @@
+--TABLA cliente
+
+insert into cliente (nombre, apellido, dni, telefono, email, nom_usuario, password)
+	values ('Jose Maria', 'Fantasia', '26666666', '249-154601233', 'sinjabonniafeitadora@geneos.com.ar', 'jfantasia', '123456'),
+	('Jose', 'Argento', '22356545', '24945555555', 'j_argento@gmail.com', 'us1', 'pas1'),
+	('Carlos', 'Menem', '8474547', '0115554477', 'elcarlo@gmail.com', 'us2', 'pas2'),
+	('Mirtha', 'Legrand', '00000001', '01111111110', 'lachiqui@gmail.com', 'us3', 'pas3'),
+	('Nestor', 'Ch....', '10111222', '0116564522', 'el_nestor@gmail.com', 'us4', 'pas4'),
+	('Diego', 'Maradona', '16233255', '011784784', 'el_diego@gmail.com', 'us5', 'pas5');
+
+
+
+-- TABLA moneda
+
+insert into moneda (nombre, pais, precio_compra, precio_venta)
+	values ('Bogarcha', 'Argenzuela', 3, 4);
+
+
+-- TABLA tipo_cuenta
+
+insert into tipo_cuenta (nombre) values ('Caja Ahorro');
+
+
+-- TABLA sucursal 
+
+insert into sucursal (ciudad) values ('Tandil');
+
+-- TABLA movimientos
+
+insert into movimientos (tipo_movimiento) values ('Transferencia');
+
+-- TABLA cuentas
+
+insert into cuentas (numero)
+
+
