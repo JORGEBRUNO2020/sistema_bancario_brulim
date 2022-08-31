@@ -22,7 +22,7 @@ try:
         print("mail  = ", row[5])
         print("Usuario  = ", row[6])
         print("Password  = ", row[7],"\n")
-
+        
 
 
 except mysql.connector.Error as e:
