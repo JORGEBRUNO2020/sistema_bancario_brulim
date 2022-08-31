@@ -17,8 +17,13 @@ try:
     for row in records:
         print("Id = ", row[0], )
         print("Name = ", row[1])
-        print("Price  = ", row[2])
-        print("Purchase date  = ", row[3], "\n")
+        print("Apellido  = ", row[2])
+        print("Telefono  = ", row[4])
+        print("mail  = ", row[5])
+        print("Usuario  = ", row[6])
+        print("Password  = ", row[7],"\n")
+
+
 
 except mysql.connector.Error as e:
     print("Error reading data from MySQL table", e)
