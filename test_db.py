@@ -13,7 +13,7 @@ try:
     records = cursor.fetchall()
     print("Total number of rows in table: ", cursor.rowcount)
 
-    print("\nPrinting each row")
+    print("\nCIENTES: \n")
     for row in records:
         print("Id = ", row[0], )
         print("Name = ", row[1])
@@ -23,6 +23,7 @@ try:
         print("Usuario  = ", row[6])
         print("Password  = ", row[7],"\n")
         
+
 
 
 except mysql.connector.Error as e:
