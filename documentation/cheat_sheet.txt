@@ -1,1 +1,20 @@
-Diagrama de DER
+DIAGRAMA DER
+- 
+
+DIAGRAMA CLASES 
+- 
+
+INSTALACION LIBRERIA FLASK
+- Reinstalar Python
+- python --version
+- pip --version 
+- py -m pip --version 
+- py -m pip install flask
+
+
+
+
+
+
+
+
