@@ -1,119 +1,147 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-08-28 13:20:21.705
+-- Last modification date: 2022-09-10 00:04:36.098
 
 -- tables
--- Table: cliente
-CREATE TABLE cliente (
-    id serial  NOT NULL,
-    nombre varchar(45)  NOT NULL,
-    apellido varchar(40)  NOT NULL,
-    dni varchar(8)  NOT NULL,
-    telefono varchar(15)  NOT NULL,
-    email varchar(60)  NULL,
-    nombre_usuario varchar(40)  NOT NULL,
-    password varchar(25)  NOT NULL,
-    CONSTRAINT cliente_pk PRIMARY KEY (id)
+-- Table: cuenta
+CREATE TABLE cuenta (
+    numero_cuenta int NOT NULL AUTO_INCREMENT,
+    cbu varchar(10) NOT NULL,
+    saldo decimal(14,2) NOT NULL,
+    sucursal_id int NOT NULL,
+    tipo_cuenta_id int NOT NULL,
+    moneda_id int NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT cuenta_pk PRIMARY KEY (numero_cuenta)
 );
 
--- Table: cuentas
-CREATE TABLE cuentas (
-    numero_cuenta serial  NOT NULL,
-    cbu varchar(10)  NOT NULL,
-    saldo decimal(15,2)  NOT NULL DEFAULT 0,
-    fecha_apertura timestamp  NOT NULL,
-    sucursal_id int  NOT NULL,
-    tipo_cuenta_id int  NOT NULL,
-    cliente_id int  NOT NULL,
-    moneda_id int  NOT NULL,
-    CONSTRAINT cuentas_pk PRIMARY KEY (numero_cuenta)
+-- Table: datos_cuenta
+CREATE TABLE datos_cuenta (
+    cuenta_numero_cuenta int NOT NULL,
+    fecha_apertura date NOT NULL,
+    estado boolean NOT NULL,
+    CONSTRAINT datos_cuenta_pk PRIMARY KEY (cuenta_numero_cuenta)
+);
+
+-- Table: datos_usuario
+CREATE TABLE datos_usuario (
+    cuil_cuit int NOT NULL,
+    dni varchar(8) NULL,
+    nombre varchar(45) NULL,
+    apellido varchar(40) NULL,
+    razon_social varchar(45) NULL,
+    telefono varchar(20) NOT NULL,
+    email varchar(60) NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT datos_usuario_pk PRIMARY KEY (cuil_cuit)
+);
+
+-- Table: login
+CREATE TABLE login (
+    nombre_usuario varchar(40) NOT NULL,
+    password varchar(25) NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT login_pk PRIMARY KEY (nombre_usuario)
 );
 
 -- Table: moneda
 CREATE TABLE moneda (
-    id serial  NOT NULL,
-    nombre varchar(25)  NOT NULL,
-    pais varchar(15)  NOT NULL,
-    precio_compra money  NOT NULL,
-    precio_venta money  NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(25) NOT NULL,
+    pais varchar(15) NOT NULL,
+    precio_compra decimal(10,2) NOT NULL,
+    precio_venta decimal(10,2) NOT NULL,
     CONSTRAINT moneda_pk PRIMARY KEY (id)
 );
 
--- Table: movimientos
-CREATE TABLE movimientos (
-    id serial  NOT NULL,
-    tipo_movimiento varchar(25)  NOT NULL,
-    CONSTRAINT movimientos_pk PRIMARY KEY (id)
-);
-
--- Table: operacion
-CREATE TABLE operacion (
-    movimientos_id int  NOT NULL,
-    cuentas_numero_cuenta int  NOT NULL,
-    CONSTRAINT operacion_pk PRIMARY KEY (movimientos_id)
+-- Table: movimiento_comision
+CREATE TABLE movimiento_comision (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre_comision varchar(40) NOT NULL,
+    costo_comision decimal(6,2) NOT NULL,
+    CONSTRAINT movimiento_comision_pk PRIMARY KEY (id)
 );
 
 -- Table: sucursal
 CREATE TABLE sucursal (
-    id serial  NOT NULL,
-    ciudad varchar(30)  NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
+    ciudad varchar(30) NOT NULL,
+    direccion varchar(45) NOT NULL,
     CONSTRAINT sucursal_pk PRIMARY KEY (id)
 );
 
 -- Table: tipo_cuenta
 CREATE TABLE tipo_cuenta (
-    id serial  NOT NULL,
-    nombre varchar(30)  NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(30) NOT NULL,
     CONSTRAINT tipo_cuenta_pk PRIMARY KEY (id)
 );
 
+-- Table: tipo_usuario
+CREATE TABLE tipo_usuario (
+    id int NOT NULL AUTO_INCREMENT,
+    usuario_tipo varchar(30) NOT NULL,
+    CONSTRAINT tipo_usuario_pk PRIMARY KEY (id)
+);
+
+-- Table: transaccion
+CREATE TABLE transaccion (
+    id int NOT NULL AUTO_INCREMENT,
+    tipo_movimiento varchar(25) NOT NULL,
+    monto float(14,2) NOT NULL,
+    fecha_movimiento date NOT NULL,
+    cuenta_numero_cuenta int NOT NULL,
+    comision_id int NOT NULL,
+    CONSTRAINT transaccion_pk PRIMARY KEY (id)
+);
+
+-- Table: usuario
+CREATE TABLE usuario (
+    id int NOT NULL AUTO_INCREMENT,
+    estado boolean NOT NULL,
+    tipo_usuario_id int NOT NULL,
+    CONSTRAINT usuario_pk PRIMARY KEY (id)
+);
+
 -- foreign keys
--- Reference: cuentas_cliente (table: cuentas)
-ALTER TABLE cuentas ADD CONSTRAINT cuentas_cliente
-    FOREIGN KEY (cliente_id)
-    REFERENCES cliente (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: cliente_tipo_usuario (table: usuario)
+ALTER TABLE usuario ADD CONSTRAINT cliente_tipo_usuario FOREIGN KEY cliente_tipo_usuario (tipo_usuario_id)
+    REFERENCES tipo_usuario (id);
 
--- Reference: cuentas_moneda (table: cuentas)
-ALTER TABLE cuentas ADD CONSTRAINT cuentas_moneda
-    FOREIGN KEY (moneda_id)
-    REFERENCES moneda (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: cuenta_moneda (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_moneda FOREIGN KEY cuenta_moneda (moneda_id)
+    REFERENCES moneda (id);
 
--- Reference: cuentas_sucursal (table: cuentas)
-ALTER TABLE cuentas ADD CONSTRAINT cuentas_sucursal
-    FOREIGN KEY (sucursal_id)
-    REFERENCES sucursal (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: cuenta_sucursal (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_sucursal FOREIGN KEY cuenta_sucursal (sucursal_id)
+    REFERENCES sucursal (id);
 
--- Reference: cuentas_tipo_cuenta (table: cuentas)
-ALTER TABLE cuentas ADD CONSTRAINT cuentas_tipo_cuenta
-    FOREIGN KEY (tipo_cuenta_id)
-    REFERENCES tipo_cuenta (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: cuenta_tipo_cuenta (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_tipo_cuenta FOREIGN KEY cuenta_tipo_cuenta (tipo_cuenta_id)
+    REFERENCES tipo_cuenta (id);
 
--- Reference: operacion_cuentas (table: operacion)
-ALTER TABLE operacion ADD CONSTRAINT operacion_cuentas
-    FOREIGN KEY (cuentas_numero_cuenta)
-    REFERENCES cuentas (numero_cuenta)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: cuenta_usuario (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_usuario FOREIGN KEY cuenta_usuario (usuario_id)
+    REFERENCES usuario (id);
 
--- Reference: operacion_movimientos (table: operacion)
-ALTER TABLE operacion ADD CONSTRAINT operacion_movimientos
-    FOREIGN KEY (movimientos_id)
-    REFERENCES movimientos (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
+-- Reference: datos_cuenta_cuenta (table: datos_cuenta)
+ALTER TABLE datos_cuenta ADD CONSTRAINT datos_cuenta_cuenta FOREIGN KEY datos_cuenta_cuenta (cuenta_numero_cuenta)
+    REFERENCES cuenta (numero_cuenta);
+
+-- Reference: datos_usuario_usuario (table: datos_usuario)
+ALTER TABLE datos_usuario ADD CONSTRAINT datos_usuario_usuario FOREIGN KEY datos_usuario_usuario (usuario_id)
+    REFERENCES usuario (id);
+
+-- Reference: login_usuario (table: login)
+ALTER TABLE login ADD CONSTRAINT login_usuario FOREIGN KEY login_usuario (usuario_id)
+    REFERENCES usuario (id);
+
+-- Reference: movimiento_comision (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT movimiento_comision FOREIGN KEY movimiento_comision (comision_id)
+    REFERENCES movimiento_comision (id);
+
+-- Reference: movimiento_cuenta (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT movimiento_cuenta FOREIGN KEY movimiento_cuenta (cuenta_numero_cuenta)
+    REFERENCES cuenta (numero_cuenta);
 
 -- End of file.
 
