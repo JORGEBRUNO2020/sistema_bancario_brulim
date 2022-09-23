@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-10 00:04:36.098
+-- Last modification date: 2022-09-15 22:04:20.034
 
 -- tables
 -- Table: cuenta
@@ -86,7 +86,6 @@ CREATE TABLE tipo_usuario (
 -- Table: transaccion
 CREATE TABLE transaccion (
     id int NOT NULL AUTO_INCREMENT,
-    tipo_movimiento varchar(25) NOT NULL,
     monto float(14,2) NOT NULL,
     fecha_movimiento date NOT NULL,
     cuenta_numero_cuenta int NOT NULL,
