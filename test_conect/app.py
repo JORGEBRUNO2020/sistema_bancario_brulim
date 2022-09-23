@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 
 @app.route("/", methods=["GET","POST"])
+
 def main():
     # When it is a GET
     if request.method == "GET":
