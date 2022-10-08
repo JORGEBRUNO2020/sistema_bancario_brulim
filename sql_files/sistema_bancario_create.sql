@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-15 22:04:20.034
+-- Last modification date: 2022-09-23 23:48:11.741
 
 -- tables
 -- Table: cuenta
@@ -9,7 +9,6 @@ CREATE TABLE cuenta (
     saldo decimal(14,2) NOT NULL,
     sucursal_id int NOT NULL,
     tipo_cuenta_id int NOT NULL,
-    moneda_id int NOT NULL,
     usuario_id int NOT NULL,
     CONSTRAINT cuenta_pk PRIMARY KEY (numero_cuenta)
 );
@@ -90,6 +89,7 @@ CREATE TABLE transaccion (
     fecha_movimiento date NOT NULL,
     cuenta_numero_cuenta int NOT NULL,
     comision_id int NOT NULL,
+    moneda_id int NOT NULL,
     CONSTRAINT transaccion_pk PRIMARY KEY (id)
 );
 
@@ -105,10 +105,6 @@ CREATE TABLE usuario (
 -- Reference: cliente_tipo_usuario (table: usuario)
 ALTER TABLE usuario ADD CONSTRAINT cliente_tipo_usuario FOREIGN KEY cliente_tipo_usuario (tipo_usuario_id)
     REFERENCES tipo_usuario (id);
-
--- Reference: cuenta_moneda (table: cuenta)
-ALTER TABLE cuenta ADD CONSTRAINT cuenta_moneda FOREIGN KEY cuenta_moneda (moneda_id)
-    REFERENCES moneda (id);
 
 -- Reference: cuenta_sucursal (table: cuenta)
 ALTER TABLE cuenta ADD CONSTRAINT cuenta_sucursal FOREIGN KEY cuenta_sucursal (sucursal_id)
@@ -141,6 +137,10 @@ ALTER TABLE transaccion ADD CONSTRAINT movimiento_comision FOREIGN KEY movimient
 -- Reference: movimiento_cuenta (table: transaccion)
 ALTER TABLE transaccion ADD CONSTRAINT movimiento_cuenta FOREIGN KEY movimiento_cuenta (cuenta_numero_cuenta)
     REFERENCES cuenta (numero_cuenta);
+
+-- Reference: transaccion_moneda (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT transaccion_moneda FOREIGN KEY transaccion_moneda (moneda_id)
+    REFERENCES moneda (id);
 
 -- End of file.
 

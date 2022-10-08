@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login de Usuario</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./styles/csslogin.css" rel="stylesheet">
+    <link href="/templates/styles/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../templates/styles/csslogin.css" rel="stylesheet">
 </head>
 <body class="text-center bg-light">
     <form class="form-signin" action="pedido.html" method="post">
-        <img class="mb-4 img-fluid" src="./images/logo.jpg" alt="" width="800" height="600">
+        <img class="mb-4 img-fluid" src="..templates/styles/images/logo.jpg" alt="" width="800" height="600">
         <h1 class="h3 mb-3 font-weight-normal">Ingresar al sistema</h1>
         <label for="inputEmail" class="sr-only">Usuario</label>
         <input type="" id="inputEmail" class="form-control" placeholder="Usuario" required autofocus>
@@ -24,3 +24,13 @@
       </form>
 </body>
 </html>
+<br>
+<br>
+<br>
+<form method="post" action="/login" enctype="multipart/form-data">
+    <input type="text" name="txt_usuario" id="txt_usuario">
+    <br>
+    <input type="text" name="txt_password" id="txt_password">
+    <br>
+    <input type="submit" value="ACEPTAR">
+</form>
