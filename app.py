@@ -46,8 +46,6 @@ def login():
     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
     password=cursor.fetchall()
     conn.commit()
-    print(password)
-    print(_password)
     if password[0][1] == _password:
         return render_template('/views/main_page.html')
     else:
