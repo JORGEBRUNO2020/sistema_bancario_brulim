@@ -4,26 +4,30 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
+from usuario import Usuario
+from conexion import *
 
 
-app= Flask(__name__, static_url_path='/static')
 
+appl= Flask(__name__, static_url_path='/static')
+app = conexion(appl)
 
 
 #Conexión con base de datos
-mysql= MySQL()
-app.config['MYSQL_DATABASE_HOST']='localhost'
-app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']=''
-app.config['MYSQL_DATABASE_DB']='sistema_bancario'
-mysql.init_app(app)
+# mysql= MySQL()
+# app.config['MYSQL_DATABASE_HOST']='localhost'
+# app.config['MYSQL_DATABASE_USER']='root'
+# app.config['MYSQL_DATABASE_PASSWORD']=''
+# app.config['MYSQL_DATABASE_DB']='sistema_bancario'
+# mysql.init_app(app)
+# bbdd = mysql.init_app(app)
 
 carpeta_imagenes = os.path.join('/templates/images')
 app.config['carpeta_imagenes'] = carpeta_imagenes
 
 
 @app.route('/carpeta_imagenes/<nombre_imagen>')
-def get_imagen(nombre_imagen):
+def get_imagen(nombre_imagen, app):
     return send_from_directory(app.config['carpeta_imagenes'], nombre_imagen)
 
 #Lanza página index.html
@@ -38,20 +42,32 @@ def pagina_login():
 
 #Método POST verifica usuario/contraseña
 @app.route('/login', methods=['POST'])
-def login():
+# def login():
+#     _usuario = request.form['txt_usuario'] 
+#     _password = request.form['txt_password'] 
+#     conn= mysql.connect()
+#     cursor=conn.cursor()
+#     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
+#     password=cursor.fetchall()
+#     conn.commit()
+#     if password[0][1] == _password:
+#         return render_template('/views/main_page.html')
+#     else:
+#         return render_template('/views/login.html')
+
+def login(app):
     _usuario = request.form['txt_usuario'] 
     _password = request.form['txt_password'] 
-    conn= mysql.connect()
+    conn= app.mysql.connect()
+
     cursor=conn.cursor()
-    cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
-    password=cursor.fetchall()
+    validacion = Usuario.validar_login(_usuario, _password, cursor, conn, bbdd)
+    # validacion = cursor.fetchall()
     conn.commit()
-    if password[0][1] == _password:
+    if validacion == True:
         return render_template('/views/main_page.html')
     else:
         return render_template('/views/login.html')
-
-
 
 
 
