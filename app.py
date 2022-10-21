@@ -34,6 +34,9 @@ def index():
 #Lanza página pagina_login.html
 @app.route('/pagina_login')
 def pagina_login():
+
+
+    
     return render_template('views/login.html')
 
 #Método POST verifica usuario/contraseña
@@ -46,10 +49,18 @@ def login():
     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
     password=cursor.fetchall()
     conn.commit()
-    if password[0][1] == _password:
-        return render_template('/views/main_page.html')
-    else:
+    try: 
+        if password[0][0] == _usuario and password[0][1] == _password:
+            return render_template('/views/main_page.html')
+        else:
+            return render_template('/views/login.html')
+    except Exception as e:
+        print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
+  
+    
+        
+
 
 
 
