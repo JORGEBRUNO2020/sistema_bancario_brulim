@@ -4,6 +4,8 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
+from usuarios import *
+
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -41,27 +43,36 @@ def pagina_login():
 
 #Método POST verifica usuario/contraseña
 @app.route('/login', methods=['POST'])
+
+  
 def login():
     _usuario = request.form['txt_usuario'] 
     _password = request.form['txt_password'] 
     conn= mysql.connect()
     cursor=conn.cursor()
-    cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
-    password=cursor.fetchall()
-    conn.commit()
-    try: 
-        if password[0][0] == _usuario and password[0][1] == _password:
-            return render_template('/views/main_page.html')
-        else:
-            return render_template('/views/login.html')
-    except Exception as e:
-        print("Exception Occured while code Execution: "+ str(e))
+    valido = Banco.validar_login(cursor, conn, _usuario, _password)
+    if valido == True:
+        return render_template('/views/main_page.html')
+    else:
         return render_template('/views/login.html')
-  
-    
         
 
-
+# def login():
+#     _usuario = request.form['txt_usuario'] 
+#     _password = request.form['txt_password'] 
+#     conn= mysql.connect()
+#     cursor=conn.cursor()
+#     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
+#     password=cursor.fetchall()
+#     conn.commit()
+#     try: 
+#         if password[0][0] == _usuario and password[0][1] == _password:
+#             return render_template('/views/main_page.html')
+#         else:
+#             return render_template('/views/login.html')
+#     except Exception as e:
+#         print("Exception Occured while code Execution: "+ str(e))
+#         return render_template('/views/login.html')
 
 
 
