@@ -58,22 +58,6 @@ def login():
         return render_template('/views/login.html')
         
 
-# def login():
-#     _usuario = request.form['txt_usuario'] 
-#     _password = request.form['txt_password'] 
-#     conn= mysql.connect()
-#     cursor=conn.cursor()
-#     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
-#     password=cursor.fetchall()
-#     conn.commit()
-#     try: 
-#         if password[0][0] == _usuario and password[0][1] == _password:
-#             return render_template('/views/main_page.html')
-#         else:
-#             return render_template('/views/login.html')
-#     except Exception as e:
-#         print("Exception Occured while code Execution: "+ str(e))
-#         return render_template('/views/login.html')
 
 
 
