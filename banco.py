@@ -1,7 +1,14 @@
+
+
+
 class Banco():
+    
 
     def __init__(self, nombre):
-        self.nombre = nombre
+        self.__nombre = nombre
+
+    def get_Nombre(self):
+        return self.__nombre
 
     def validar_login(cursor, conn, _usuario, _password):
         cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
@@ -15,3 +22,7 @@ class Banco():
         except Exception as e:
             print("Exception Occured while code Execution: "+ str(e))
             return False
+
+# banco = Banco("Brulim")
+
+# # print(banco.get_Nombre())

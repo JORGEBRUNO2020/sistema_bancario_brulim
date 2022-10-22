@@ -94,7 +94,10 @@ def realizar_transferencia():
 def realizar_retiro():
     return render_template('/views/realizar_retiro.html')
 
-
+#Lanza página cerrar_cuenta.html
+@app.route('/cerrar_cuenta')
+def cerrar_cuenta():
+    return render_template('/views/cerrar_cuenta.html')
 
 
 
