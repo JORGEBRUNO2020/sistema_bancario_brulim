@@ -37,15 +37,10 @@ def index():
 #Lanza página pagina_login.html
 @app.route('/pagina_login')
 def pagina_login():
-
-
-    
     return render_template('views/login.html')
 
 #Método POST verifica usuario/contraseña
 @app.route('/login', methods=['POST'])
-
-  
 def login():
     _usuario = request.form['txt_usuario'] 
     _password = request.form['txt_password'] 
@@ -58,22 +53,50 @@ def login():
         return render_template('/views/login.html')
         
 
-# def login():
-#     _usuario = request.form['txt_usuario'] 
-#     _password = request.form['txt_password'] 
-#     conn= mysql.connect()
-#     cursor=conn.cursor()
-#     cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
-#     password=cursor.fetchall()
-#     conn.commit()
-#     try: 
-#         if password[0][0] == _usuario and password[0][1] == _password:
-#             return render_template('/views/main_page.html')
-#         else:
-#             return render_template('/views/login.html')
-#     except Exception as e:
-#         print("Exception Occured while code Execution: "+ str(e))
-#         return render_template('/views/login.html')
+#Lanza página crear_cuenta.html
+@app.route('/crear_cuenta')
+def crear_cuenta():
+    return render_template('/views/crear_cuenta.html')
+
+
+#Lanza página listar_cuentas.html
+@app.route('/listar_cuentas')
+def listar_cuentas():
+    return render_template('/views/listar_cuentas.html')
+
+
+#Lanza página listar_movimientos.html
+@app.route('/listar_movimientos')
+def listar_movimientos():
+    return render_template('/views/listar_movimientos.html')
+
+
+#Lanza página listar_saldos.html
+@app.route('/listar_saldos')
+def listar_saldos():
+    return render_template('/views/listar_saldos.html')
+
+
+#Lanza página realizar_deposito.html
+@app.route('/realizar_deposito')
+def realizar_deposito():
+    return render_template('/views/realizar_deposito.html')
+
+
+#Lanza página realizar_transferencial.html
+@app.route('/realizar_transferencia')
+def realizar_transferencia():
+    return render_template('/views/realizar_transferencia.html')
+
+
+#Lanza página realizar_retiro.html
+@app.route('/realizar_retiro')
+def realizar_retiro():
+    return render_template('/views/realizar_retiro.html')
+
+
+
+
 
 
 
