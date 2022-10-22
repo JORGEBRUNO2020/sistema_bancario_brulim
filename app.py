@@ -5,6 +5,7 @@ from datetime import datetime
 from flask import send_from_directory
 import os
 from usuarios import *
+from banco import *
 
 
 
@@ -51,7 +52,7 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    if valido == True:
+    if valido:
         return render_template('/views/main_page.html')
     else:
         return render_template('/views/login.html')
