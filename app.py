@@ -4,12 +4,16 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
+
+import sqlalchemy
 from templates.clases.usuarios import *
 from templates.clases.banco import *
 
 
 
 app= Flask(__name__, static_url_path='/static')
+
+
 
 
 
@@ -105,10 +109,15 @@ def cerrar_cuenta():
 def administrador():
     return render_template('/views/administrador_main.html')
 
-#Lanza página administrador_cargar_cliente.html
-@app.route('/administrador_cargar_cliente')
-def administrador_cargar_cliente():
-    return render_template('/views/administrador_cargar_cliente.html')
+#Lanza página administrador_cargar_cliente_individuo.html
+@app.route('/administrador_cargar_cliente_individuo')
+def administrador_cargar_cliente_individuo():
+    return render_template('/views/administrador_cargar_cliente_individuo.html')
+
+#Lanza página administrador_cargar_cliente_pyme.html
+@app.route('/administrador_cargar_cliente_pyme')
+def administrador_cargar_cliente_pyme():
+    return render_template('/views/administrador_cargar_cliente_pyme.html')
 
 #Lanza página administrador_listar_cuentas.html
 @app.route('/administrador_listar_cuentas')
