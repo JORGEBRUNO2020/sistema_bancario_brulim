@@ -28,6 +28,11 @@ carpeta_imagenes = os.path.join('/templates/images')
 app.config['carpeta_imagenes'] = carpeta_imagenes
 
 
+def valor_variable(id):
+    id_usuario_login.append(id)
+    return id_usuario_login
+    
+
 @app.route('/carpeta_imagenes/<nombre_imagen>')
 def get_imagen(nombre_imagen):
     return send_from_directory(app.config['carpeta_imagenes'], nombre_imagen)
@@ -51,7 +56,7 @@ def login():
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
     if valido[0] == 1:
-        id_usuario_login = valido [1]
+        valor_variable(valido[1])
         return render_template('/views/main_page.html')
     if valido[0] == 0:
         return render_template('/views/login.html')
@@ -81,10 +86,10 @@ def listar_saldos():
     # tipo_cuenta_id=request.form['tipo_cuenta_id']
     # numero_cuenta=request.form['numero_cuenta']
    # id_usuario_login = id_usuario_login
-   # print(id_usuario_login)
+    print(id_usuario_login[0][0])
     conn= mysql.connect()
     cursor=conn.cursor()
-    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn,1)
+    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, id_usuario_login[0][0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 
