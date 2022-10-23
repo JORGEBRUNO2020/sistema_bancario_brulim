@@ -74,12 +74,15 @@ def listar_movimientos():
 
 
 #Lanza página listar_saldos.html
-@app.route('/listar_saldos')
+@app.route('/listar_saldos', methods=['GET'])
 def listar_saldos():
+    # tipo_cuenta_id=request.form['tipo_cuenta_id']
+    # numero_cuenta=request.form['numero_cuenta']
+
     conn= mysql.connect()
     cursor=conn.cursor()
     Caja_ahorro_comun.get_saldo(cursor, conn, 1, 1, 1)
-    return render_template('/views/listar_saldos.html')
+    return render_template('/views/listar_saldos.html' )
 
 
 #Lanza página realizar_deposito.html

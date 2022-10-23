@@ -1,4 +1,4 @@
-from usuarios import Usuario
+from  templates.clases.usuarios import Usuario
 
 class Administrador(Usuario):
 

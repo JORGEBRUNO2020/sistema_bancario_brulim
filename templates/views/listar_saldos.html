@@ -1,8 +1,37 @@
 {% include '/views/header.html' %}
 
 <div id="mySidenav" class="sidenav">
-  
+    <form class="form-signin" action="/listar_saldos" method="get">
+        <!-- <img class="mb-4 img-fluid" src={{ url_for('static', filename='/images/logo.jpg' ) }} alt="" width="800" height="600"> -->
+        <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese Tipo de Cuenta</h1>
+        <label for="inputEmail" class="sr-only">Usuario</label>
+
+        <input type="text" name="tipo_cuenta_id" id="tipo_cuenta_id" class="form-control" placeholder="" required autofocus>
+        <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese Número de Cuenta</h1>
+        <label for="inputPassword" class="sr-only">Clave</label>
+        <input type="text" "text" name="numero_cuenta" id="numero_cuenta" class="form-control" placeholder="" required>
+        <div class="checkbox mb-3">
+        
+        </div>
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Aceptar</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+      </form>
 </div>
+
+<!-- <form method="post" action="/store" enctype="multipart/form-data">
+    Nombre:
+    <input type="text" name="txtNombre" id="txtNombre">
+    <br>
+    Correo:
+    <input type="text" name="txtCorreo" id="txtCorreo">
+    <br>
+    Foto:
+    <input type="file" name="txtFoto" id="txtFoto">
+    <br>
+    <br>
+    <input type="submit" value="Agregar">
+</form> -->
 
 
 {% include '/views/footer.html' %}
+

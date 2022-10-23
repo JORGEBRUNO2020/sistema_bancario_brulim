@@ -1,4 +1,4 @@
-from cuentas import Cuenta
+from  templates.clases.cuentas import Cuenta
 
 class Cuenta_corriente(Cuenta):
 

@@ -1,4 +1,4 @@
-from individuo import Individuos 
+from  templates.clases.individuo import Individuos 
 
 class Plazo_fijo():
 
