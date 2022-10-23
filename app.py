@@ -4,8 +4,6 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
-
-import sqlalchemy
 from templates.clases.usuarios import *
 from templates.clases.banco import *
 
