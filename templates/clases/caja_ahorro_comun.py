@@ -30,7 +30,6 @@ class Caja_ahorro_comun(Cuenta):
         cursor.execute('select * from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id where us.id =%s',(usuario_id))
         cuentas_datos=cursor.fetchall()
         conn.commit()
-        print(cuentas_datos)
         return cuentas_datos
         # try: 
         #     if password[0][0] == _usuario and password[0][1] == _password:

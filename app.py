@@ -13,7 +13,8 @@ from templates.clases.caja_ahorro_comun import *
 
 app= Flask(__name__, static_url_path='/static')
 
-
+global id_usuario_login
+id_usuario_login = []
 
 #Conexión con base de datos
 mysql= MySQL()
@@ -49,9 +50,10 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    if valido:
+    if valido[0] == 1:
+        id_usuario_login = valido [1]
         return render_template('/views/main_page.html')
-    else:
+    if valido[0] == 0:
         return render_template('/views/login.html')
         
 
@@ -78,10 +80,11 @@ def listar_movimientos():
 def listar_saldos():
     # tipo_cuenta_id=request.form['tipo_cuenta_id']
     # numero_cuenta=request.form['numero_cuenta']
-
+   # id_usuario_login = id_usuario_login
+   # print(id_usuario_login)
     conn= mysql.connect()
     cursor=conn.cursor()
-    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, 1)
+    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn,1)
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 

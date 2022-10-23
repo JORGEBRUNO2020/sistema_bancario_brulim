@@ -11,17 +11,23 @@ class Banco():
         return self.__nombre
 
     def validar_login(cursor, conn, _usuario, _password):
+        validacion = []
         cursor.execute("select * from login where nombre_usuario=%s",(_usuario))
         password=cursor.fetchall()
         conn.commit()
         try: 
             if password[0][0] == _usuario and password[0][1] == _password:
-                return True
+                validacion = [1,[password[0][2]]]
+                return validacion
             else:
-                return False
+                validacion = [0]
+                return validacion
         except Exception as e:
             print("Exception Occured while code Execution: "+ str(e))
-            return False
+            validacion = [0]
+            return  validacion
+
+    #def asignar_usuario
 
 # banco = Banco("Brulim")
 
