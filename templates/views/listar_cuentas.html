@@ -1,8 +1,35 @@
 {% include '/views/header.html' %}
 
-<div id="mySidenav" class="sidenav">
-  
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
+
+<div>
+    <h1 style="text-align: center">Listado de Cuentas</h1>
+    <br>
 </div>
+<table class="table table-bordered">
+    <tr>
+        <td class="titulos">CBU</td><td class="titulos">Saldo</td><td class="titulos">Tipo de Cuenta</td>
+    </tr>
+    {% for listar_cuentas in listado_cuentas %}
+    <tr>
+        <td class="datos_texto">{{listar_cuentas[12]}}</td><td class="datos_numeros">{{listar_cuentas[13]}}</td><td class="datos_texto">{{listar_cuentas[18]}}</td>
+        <br>
+    </tr>
+    {% endfor %}
+
+</table>
 
 
 {% include '/views/footer.html' %}

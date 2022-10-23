@@ -36,3 +36,6 @@ INSERT INTO sistema_bancario.datos_usuario
 (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
 VALUES(215699451, '21569945', 'Jorge', 'Bruno', NULL, '2494658944', 'georgie@gmail.com', 3);
 
+INSERT INTO sistema_bancario.datos_cuenta (cuenta_numero_cuenta, fecha_apertura, estado) VALUES(1, '2022-10-10', 1);
+INSERT INTO sistema_bancario.datos_cuenta (cuenta_numero_cuenta, fecha_apertura, estado) VALUES(2, '2022-06-08', 1);
+
