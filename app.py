@@ -81,8 +81,8 @@ def listar_saldos():
 
     conn= mysql.connect()
     cursor=conn.cursor()
-    Caja_ahorro_comun.get_saldo(cursor, conn, 1, 1, 1)
-    return render_template('/views/listar_saldos.html' )
+    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, 1)
+    return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 
 #Lanza página realizar_deposito.html
