@@ -6,6 +6,8 @@ from flask import send_from_directory
 import os
 from templates.clases.usuarios import *
 from templates.clases.banco import *
+from templates.clases.caja_ahorro_comun import *
+
 
 
 
@@ -74,6 +76,9 @@ def listar_movimientos():
 #Lanza página listar_saldos.html
 @app.route('/listar_saldos')
 def listar_saldos():
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    Caja_ahorro_comun.get_saldo(cursor, conn, 1, 1, 1)
     return render_template('/views/listar_saldos.html')
 
 
