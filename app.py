@@ -99,11 +99,46 @@ def realizar_retiro():
 def cerrar_cuenta():
     return render_template('/views/cerrar_cuenta.html')
 
+# Routeos del administrador
+#Lanza página administrador_main.html
+@app.route('/administrador_header')
+def administrador():
+    return render_template('/views/administrador_main.html')
 
+#Lanza página administrador_cargar_cliente.html
+@app.route('/administrador_cargar_cliente')
+def administrador_cargar_cliente():
+    return render_template('/views/administrador_cargar_cliente.html')
 
+#Lanza página administrador_listar_cuentas.html
+@app.route('/administrador_listar_cuentas')
+def administrador_listar_cuentas():
+    return render_template('/views/administrador_listar_cuentas.html')
 
+#Lanza página administrador_listar_saldos.html
+@app.route('/administrador_listar_saldos')
+def administrador_listar_saldos():
+    return render_template('/views/administrador_listar_saldos.html')
 
+#Lanza página administrador_listar_movimientos.html
+@app.route('/administrador_listar_movimientos')
+def administrador_listar_movimientos():
+    return render_template('/views/administrador_listar_movimientos.html')
 
+#Lanza página administrador_modificar_datos_cliente.html
+@app.route('/administrador_modificar_datos_cliente')
+def administrador_modificar_datos_cliente():
+    return render_template('/views/administrador_modificar_datos_cliente.html')
+
+#Lanza página administrador_ver_comisiones.html
+@app.route('/administrador_ver_comisiones')
+def administrador_ver_comisiones():
+    return render_template('/views/administrador_ver_comisiones.html')
+
+#Lanza página index.html para salir
+@app.route('/login')
+def administrador_salir():
+    return render_template('views/login.html')
 
 #Execute APP
 if __name__== '__main__':
