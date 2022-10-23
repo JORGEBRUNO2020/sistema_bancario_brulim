@@ -1,5 +1,5 @@
-from caja_ahorro_comun import Caja_ahorro_comun
-from caja_ahorro_comun import Caja_ahorro_comun, Cuenta
+from  templates.clases.caja_ahorro_comun import Caja_ahorro_comun
+from  templates.clases.caja_ahorro_comun import Caja_ahorro_comun, Cuenta
 
 
 class Caja_ahorro_saldo_retenido(Caja_ahorro_comun, Cuenta):

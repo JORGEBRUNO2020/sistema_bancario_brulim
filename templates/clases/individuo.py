@@ -1,4 +1,4 @@
-from clientes import Usuario, Cliente
+from  templates.clases.clientes import Usuario, Cliente
 
 
 

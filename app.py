@@ -6,6 +6,8 @@ from flask import send_from_directory
 import os
 from templates.clases.usuarios import *
 from templates.clases.banco import *
+from templates.clases.caja_ahorro_comun import *
+
 
 
 
@@ -72,9 +74,15 @@ def listar_movimientos():
 
 
 #Lanza página listar_saldos.html
-@app.route('/listar_saldos')
+@app.route('/listar_saldos', methods=['GET'])
 def listar_saldos():
-    return render_template('/views/listar_saldos.html')
+    # tipo_cuenta_id=request.form['tipo_cuenta_id']
+    # numero_cuenta=request.form['numero_cuenta']
+
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, 1)
+    return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 
 #Lanza página realizar_deposito.html

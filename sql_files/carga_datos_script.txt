@@ -1,76 +1,38 @@
-insert into tipo_usuario (usuario_tipo)
-values 
-('ADMINISTRADOR'), 
-('INDIVIDUO'), 
-('PYME'), 
-('EMPLEADO')
+insert into sucursal (ciudad, direccion) values ('Tandil', 'Avellaneda 1233')
 
-insert into movimiento_comision (nombre_comision, costo_comision) 
-values 
-('MONTO SALDO RETENIDO', 5000),
-('APERTURA CAJA AHORRO', 0),
-('APERTURA CAJA AHOORO SALDO RETENIDO', 0),
-('APERTURA CUENTA CORRIENTE COMUN', 0),
-('APERTURA CUENTA CORRIENTE SALDO RETENIDO', 0),
-('TRANSFERENCIA', 10),
-('EXTRACCION CAJA AHORRO COMUN', 10),
-('EXTRACCION CAJA AHORRO SR', 0)
+insert into tipo_usuario (usuario_tipo) values ('Individuo')
+insert into tipo_usuario (usuario_tipo) values ('Pyme')
+insert into tipo_usuario (usuario_tipo) values ('Administrador')
 
-insert into sucursal ( ciudad, direccion)
-values
-('TANDIL', 'MARCONI 1450'),
-('TANDIL','RIVADAVIA 235'),
-('BALCARCE', 'FANGIO 541'),
-('AYACUCHO', 'SOLANET 652'),
-('RAUCH', 'PAZ 52'),
-('TANDIL', '9 DE JULIO 784')
 
-insert into tipo_cuenta (nombre)
-values
-('CAJA AHORRO COMUN'),
-('CAJA AHORRO SR'),
-('CUENTA CORRIENTE COMUN'),
-('CUENTA CORRIENTE SR')
+insert into usuario (estado, tipo_usuario_id) values (true,1 )
+insert into usuario (estado, tipo_usuario_id) values (true,1 )
+insert into usuario (estado, tipo_usuario_id) values (true,1 )
+insert into usuario (estado, tipo_usuario_id) values (true,3 )
 
-insert into moneda (nombre, pais, precio_compra, precio_venta)
-values
-('PESO', 'ARGENTINA', 0, 0),
-('DOLAR', 'EE UU', 280, 300),
-('EURO', 'UNION EUROPEA', 310, 350),
-('REAL', 'BRASIL', 70, 78)
+insert into login (nombre_usuario, password, usuario_id) values ('mlimideiro', 'MarceLimi', 1)
+insert into login (nombre_usuario, password, usuario_id) values ('jfur', '123456', 2)
+insert into login (nombre_usuario, password, usuario_id) values ('jbruno', '111111', 3)
+insert into login (nombre_usuario, password, usuario_id) values ('mariomars', '1212', 4)
 
-insert into usuario (estado, tipo_usuario_id)
-values
-(True, 1),
-(True, 3),
-(False, 2),
-(True, 1),
-(True, 1),
-(True, 2),
-(True, 4),
-(True, 3),
-(False, 3) 
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Caja Ahorro');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Caja Ahorro SR');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente SR');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente Dólares');
 
-insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, moneda_id, usuario_id)
-values
-('985698569', 200, 1,1,1,1),
-('325632563', 1400, 4, 2, 1, 2),
-('214521452', 62000, 2, 4, 1, 7),
-('258741258', 2300, 3, 2, 2, 4)
+INSERT INTO sistema_bancario.cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES('2326353521', 500, 1, 1, 1);
+INSERT INTO sistema_bancario.cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES('205623369', 6500, 1, 3, 1);
 
-insert into login (nombre_usuario, password, usuario_id)
-values
-('USUARIO 1', 'PASS 1', 1),
-('USUARIO 2', 'PASS 2', 2),
-('USUARIO 3', 'PASS 3', 3),
-('USUARIO 4', 'PASS 4', 4)
+INSERT INTO sistema_bancario.datos_usuario
+(cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
+VALUES(263535219, '26353521', 'Marcelo', 'Limideiro', NULL, '2494449999', 'mlimideiro@gmail.com', 1);
 
-insert into datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
-values
-(2025412544, '23456789', 'PEPE', 'ARGENTO', '', '55587484', '' ,1),
-(2056854785, '21458745', 'ARTURO', 'BUENO', '', '65478969', '', 2),
-(2056655856, '27845888', 'MARIA', 'ANTONIETA', '', '55587458', 'mantonieta@gmail.com', 3)
+INSERT INTO sistema_bancario.datos_usuario
+(cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
+VALUES(215699451, '21569945', 'Jorge', 'Bruno', NULL, '2494658944', 'georgie@gmail.com', 3);
 
-insert into transaccion (monto, fecha_movimiento, cuenta_numero_cuenta, comision_id)
-values
-(500, '2022-11-5', 1, 9)
+INSERT INTO sistema_bancario.datos_usuario
+(cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
+VALUES(215699451, '21569945', 'Jorge', 'Bruno', NULL, '2494658944', 'georgie@gmail.com', 3);
+
