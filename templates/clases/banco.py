@@ -17,7 +17,9 @@ class Banco():
         conn.commit()
         try: 
             if password[0][0] == _usuario and password[0][1] == _password:
+                
                 validacion = [1,[password[0][2]]]
+                
                 return validacion
             else:
                 validacion = [0]
@@ -25,7 +27,8 @@ class Banco():
         except Exception as e:
             print("Exception Occured while code Execution: "+ str(e))
             validacion = [0]
-            return  validacion
+            ruta = ('/views/login.html')
+            return  ruta
 
     #def asignar_usuario
 

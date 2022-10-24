@@ -57,10 +57,16 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    if valido[0] == 1:
-        valor_variable(valido[1])
-        return render_template('/views/main_page.html')
-    if valido[0] == 0:
+    # print(valido[1][0])
+    if len(valido)>1:
+        if valido[0] == 1 and valido[1][0] !=4:
+            valor_variable(valido[1])
+            return render_template('/views/main_page.html')
+        elif valido[1][0] == 4:
+            return render_template('/views/administrador_main.html')
+        else:
+            return render_template('/views/login.html')
+    else:
         return render_template('/views/login.html')
         
 
