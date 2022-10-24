@@ -22,9 +22,9 @@
     <tr>
         <td class="titulos">CBU</td><td class="titulos">Saldo</td><td class="titulos">Tipo de Cuenta</td>
     </tr>
-    {% for datos in cuentas_datos %}
+    {% for listar_saldos in cuentas_datos %}
     <tr>
-        <td class="datos_texto">{{datos[12]}}</td><td class="datos_numeros">{{datos[13]}}</td><td class="datos_texto">{{datos[18]}}</td>
+        <td class="datos_texto">{{listar_saldos[12]}}</td><td class="datos_numeros">{{listar_saldos[13]}}</td><td class="datos_texto">{{listar_saldos[18]}}</td>
         <br>
     </tr>
     {% endfor %}

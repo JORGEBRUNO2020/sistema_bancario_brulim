@@ -7,6 +7,7 @@ import os
 from templates.clases.usuarios import *
 from templates.clases.banco import *
 from templates.clases.caja_ahorro_comun import *
+from templates.clases.cuentas import *
 
 
 
@@ -71,9 +72,13 @@ def crear_cuenta():
 
 
 #Lanza página listar_cuentas.html
-@app.route('/listar_cuentas')
+@app.route('/listar_cuentas', methods=['GET'])
 def listar_cuentas():
-    return render_template('/views/listar_cuentas.html')
+    conn= mysql.connect()
+    listar_cuentas=conn.cursor()
+    listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0][0])
+    return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
+
 
 
 #Lanza página listar_movimientos.html
@@ -86,8 +91,8 @@ def listar_movimientos():
 @app.route('/listar_saldos', methods=['GET'])
 def listar_saldos():
     conn= mysql.connect()
-    cursor=conn.cursor()
-    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, id_usuario_login[0][0])
+    listar_saldos=conn.cursor()
+    cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0][0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 
