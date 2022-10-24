@@ -28,7 +28,7 @@ class Individuos(Cliente,Usuario):
     def get_apellido():
         pass
 
-    def set_nombre(): #¿ PORQUÉ QUISIERA CAMBIAR EL NOMBRE O EL APELLIDO?
+    def set_nombre():
         pass
 
     def set_apellido():

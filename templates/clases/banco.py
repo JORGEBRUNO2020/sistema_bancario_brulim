@@ -17,9 +17,7 @@ class Banco():
         conn.commit()
         try: 
             if password[0][0] == _usuario and password[0][1] == _password:
-                
                 validacion = [1,[password[0][2]]]
-                
                 return validacion
             else:
                 validacion = [0]
