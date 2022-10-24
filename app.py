@@ -54,6 +54,7 @@ def pagina_login():
 #Método POST verifica usuario/contraseña
 @app.route('/login', methods=['POST'])
 def login():
+    del id_usuario_login[:]
     _usuario = request.form['txt_usuario'] 
     _password = request.form['txt_password'] 
     conn= mysql.connect()
