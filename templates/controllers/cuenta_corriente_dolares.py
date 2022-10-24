@@ -1,5 +1,5 @@
-from  templates.clases.cuentas import Cuenta
-from  templates.clases.cuenta_corriente import Cuenta_corriente
+from  templates.controllers.cuentas import Cuenta
+from  templates.controllers.cuenta_corriente import Cuenta_corriente
 
 class Cuenta_corriente_sr(Cuenta_corriente ,Cuenta):
 

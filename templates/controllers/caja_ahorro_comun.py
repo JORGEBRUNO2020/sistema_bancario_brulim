@@ -1,4 +1,4 @@
-from templates.clases.cuentas import Cuenta
+from templates.controllers.cuentas import Cuenta
 
 class Caja_ahorro_comun(Cuenta):
 

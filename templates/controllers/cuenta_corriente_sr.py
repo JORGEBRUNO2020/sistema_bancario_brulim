@@ -1,14 +1,13 @@
-from  templates.clases.caja_ahorro_comun import Caja_ahorro_comun
-from  templates.clases.caja_ahorro_comun import Caja_ahorro_comun, Cuenta
+from  templates.controllers.cuentas import Cuenta
+from  templates.controllers.cuenta_corriente import Cuenta_corriente
 
-
-class Caja_ahorro_saldo_retenido(Caja_ahorro_comun, Cuenta):
+class Cuenta_corriente_sr(Cuenta_corriente ,Cuenta):
 
     def __init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo, tipo, saldo_retenido):
-        Caja_ahorro_comun.__init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo, tipo)
-        Cuenta.__init__((self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo))
+        Cuenta.__init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo)
+        Cuenta_corriente.__init__(self, tipo)
         self.__saldo_retenido = saldo_retenido
-    
+
     def get_titular():
         pass
 
@@ -35,4 +34,3 @@ class Caja_ahorro_saldo_retenido(Caja_ahorro_comun, Cuenta):
 
     def get_saldo_retenido():
         pass
-
