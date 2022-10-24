@@ -75,7 +75,6 @@ def listar_cuentas():
     conn= mysql.connect()
     listar_cuentas=conn.cursor()
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0][0])
-    print(listado_cuentas)
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
 
@@ -90,8 +89,8 @@ def listar_movimientos():
 @app.route('/listar_saldos', methods=['GET'])
 def listar_saldos():
     conn= mysql.connect()
-    cursor=conn.cursor()
-    cuentas_datos=Caja_ahorro_comun.get_saldo(cursor, conn, id_usuario_login[0][0])
+    listar_saldos=conn.cursor()
+    cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0][0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 

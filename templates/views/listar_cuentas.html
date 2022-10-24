@@ -4,7 +4,7 @@
     .titulos {
         text-align: center;
         font-weight: bold;
-        font-size: x-large;
+        font-size: large;
     }
     .datos_texto{
         text-align: center; 
@@ -20,11 +20,11 @@
 </div>
 <table class="table table-bordered">
     <tr>
-        <td class="titulos">CBU</td><td class="titulos">Saldo</td><td class="titulos">Tipo de Cuenta</td>
+        <td class="titulos">CBU</td><td class="titulos">Número de Cuenta</td><td class="titulos">Tipo de Cuenta</td><td class="titulos">Fecha de Apertura</td><td class="titulos">Sucursal ID</td><td class="titulos">Dirección</td><td class="titulos">Ciudad</td>
     </tr>
     {% for listar_cuentas in listado_cuentas %}
     <tr>
-        <td class="datos_texto">{{listar_cuentas[12]}}</td><td class="datos_numeros">{{listar_cuentas[13]}}</td><td class="datos_texto">{{listar_cuentas[18]}}</td>
+        <td class="datos_texto">{{listar_cuentas[0]}}</td><td class="datos_numeros">{{listar_cuentas[1]}}</td><td class="datos_texto">{{listar_cuentas[3]}}</td><td class="datos_texto">{{listar_cuentas[4]}}</td><td class="datos_texto">{{listar_cuentas[2]}}</td><td class="datos_texto">{{listar_cuentas[5]}}</td><td class="datos_texto">{{listar_cuentas[6]}}</td>
         <br>
     </tr>
     {% endfor %}
