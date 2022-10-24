@@ -25,7 +25,8 @@ class Banco():
         except Exception as e:
             print("Exception Occured while code Execution: "+ str(e))
             validacion = [0]
-            return  validacion
+            ruta = ('/views/login.html')
+            return  ruta
 
     #def asignar_usuario
 
