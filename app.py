@@ -34,7 +34,8 @@ app.config['carpeta_imagenes'] = carpeta_imagenes
 
 def valor_variable(id):
     id_usuario_login.append(id)
-    return id_usuario_login
+    print(id_usuario_login[0])
+    return id_usuario_login[0]
     
 
 @app.route('/carpeta_imagenes/<nombre_imagen>')
@@ -60,17 +61,22 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    # print(valido[1][0])
-    if len(valido)>1:
-        if valido[0] == 1 and valido[1][0] !=4:
-            valor_variable(valido[1])
+
+  #  if 1=1:
+    try:
+        if valido[0] == 1 and valido[1][0][4] != 'Administrador':
+            valor_variable(valido[1][0][2])
             return render_template('/views/main_page.html')
-        elif valido[1][0] == 4:
+        if valido[0] == 1 and valido[1][0][4] == 'Administrador':
+            valor_variable(valido[1][0][2])
             return render_template('/views/administrador_main.html')
-        else:
-            return render_template('/views/login.html')
-    else:
+        if valido[0] != 1:
+             return render_template('/views/login.html')
+    except Exception as e:
+        print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
+# else:
+    #     return render_template('/views/login.html')
         
 
 #Lanza página crear_cuenta.html
