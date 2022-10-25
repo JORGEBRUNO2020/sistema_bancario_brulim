@@ -1,8 +1,35 @@
 {% include '/views/header.html' %}
 
-<div id="mySidenav" class="sidenav">
-  
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
+
+<div>
+    <h1 style="text-align: center">Listado de Movimientos</h1>
+    <br>
 </div>
+<table class="table table-bordered">
+    <tr>
+        <td class="titulos">CBU</td><td class="titulos">Número de Cuenta</td><td class="titulos">Tipo de Cuenta</td><td class="titulos">Fecha de Apertura</td><td class="titulos">Sucursal ID</td><td class="titulos">Dirección</td><td class="titulos">Ciudad</td>
+    </tr>
+    {% for listar_movimientos in listado_movimientos %}
+    <tr>
+        <td class="datos_texto">{{listar_movimientos[0]}}</td><td class="datos_numeros">{{listar_movimientos[1]}}</td><td class="datos_texto">{{listar_movimientos[3]}}</td><td class="datos_texto">{{listar_movimientos[4]}}</td><td class="datos_texto">{{listar_movimientos[2]}}</td><td class="datos_texto">{{listar_movimientos[5]}}</td><td class="datos_texto">{{listar_movimientos[6]}}</td>
+        <br>
+    </tr>
+    {% endfor %}
+
+</table>
 
 
 {% include '/views/footer.html' %}

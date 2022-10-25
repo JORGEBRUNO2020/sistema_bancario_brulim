@@ -24,10 +24,5 @@ class Banco():
             print("Exception Occured while code Execution: "+ str(e))
             validacion = [0]
             return ('/views/login.html')
-             
 
-    #def asignar_usuario
 
-# banco = Banco("Brulim")
-
-# # print(banco.get_Nombre())

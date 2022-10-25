@@ -11,8 +11,6 @@ from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
 
 
-
-
 app= Flask(__name__, static_url_path='/static')
 
 global id_usuario_login
@@ -34,7 +32,6 @@ app.config['carpeta_imagenes'] = carpeta_imagenes
 
 def valor_variable(id):
     id_usuario_login.append(id)
-    print(id_usuario_login[0])
     return id_usuario_login[0]
     
 
@@ -73,9 +70,6 @@ def login():
     except Exception as e:
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
-# else:
-    #     return render_template('/views/login.html')
-        
 
 #Lanza página crear_cuenta.html
 @app.route('/crear_cuenta')
@@ -94,9 +88,13 @@ def listar_cuentas():
 
 
 #Lanza página listar_movimientos.html
-@app.route('/listar_movimientos')
+@app.route('/listar_movimientos', methods=['GET'])
 def listar_movimientos():
-    return render_template('/views/listar_movimientos.html')
+    conn= mysql.connect()
+    listar_movimientos=conn.cursor()
+    listado_movimientos=Caja_ahorro_comun.get_movimientos(listar_movimientos, conn, id_usuario_login[0])
+    print(listado_movimientos)
+    return render_template('/views/listar_movimientos.html',listado_movimientos=listado_movimientos)
 
 
 #Lanza página listar_saldos.html
