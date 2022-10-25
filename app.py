@@ -61,8 +61,6 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-
-  #  if 1=1:
     try:
         if valido[0] == 1 and valido[1][0][4] != 'Administrador':
             valor_variable(valido[1][0][2])
@@ -90,7 +88,7 @@ def crear_cuenta():
 def listar_cuentas():
     conn= mysql.connect()
     listar_cuentas=conn.cursor()
-    listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0][0])
+    listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
 
@@ -106,7 +104,7 @@ def listar_movimientos():
 def listar_saldos():
     conn= mysql.connect()
     listar_saldos=conn.cursor()
-    cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0][0])
+    cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
 
