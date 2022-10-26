@@ -88,12 +88,15 @@ def listar_cuentas():
 
 
 #Lanza página listar_movimientos.html
-@app.route('/listar_movimientos', methods=['GET'])
+@app.route('/listar_movimientos', methods=['POST','GET'])
 def listar_movimientos():
     conn= mysql.connect()
     listar_movimientos=conn.cursor()
     listado_movimientos=Caja_ahorro_comun.get_movimientos(listar_movimientos, conn, id_usuario_login[0])
     print(listado_movimientos)
+    if request.method == 'POST':
+        cuenta_movimiento = request.form["cuenta_movimiento"]
+        Caja_ahorro_comun.get_id_cuenta(cuenta_movimiento)
     return render_template('/views/listar_movimientos.html',listado_movimientos=listado_movimientos)
 
 

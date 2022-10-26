@@ -15,9 +15,16 @@
 </style>
 
 <div>
+    <form class="form-signin" action="/listar_movimientos" method="post">
     <h1 style="text-align: center">Listado de Movimientos</h1>
     <br>
 </div>
+    <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese el Número de Cuenta</h1>
+    <label for="inputEmail" class="sr-only"></label>
+    <input type="" name="cuenta_movimiento" id="cuenta_movimiento" class="form-control" placeholder="Cuenta" required autofocus>
+    <button class="btn btn-lg btn-secondary btn-block" type="submit">Aceptar</button>
+</form>
+
 <table class="table table-bordered">
     <tr>
         <td class="titulos">CBU</td><td class="titulos">Número de Cuenta</td><td class="titulos">Tipo de Cuenta</td><td class="titulos">Fecha de Apertura</td><td class="titulos">Sucursal ID</td><td class="titulos">Dirección</td><td class="titulos">Ciudad</td>
