@@ -93,12 +93,15 @@ def listar_movimientos():
     conn= mysql.connect()
     listar_movimientos=conn.cursor()
     listado_movimientos=Caja_ahorro_comun.get_movimientos(listar_movimientos, conn, id_usuario_login[0])
-    print(listado_movimientos)
-    if request.method == 'POST':
-        cuenta_movimiento = request.form["cuenta_movimiento"]
-        Caja_ahorro_comun.get_id_cuenta(cuenta_movimiento)
-    return render_template('/views/listar_movimientos.html',listado_movimientos=listado_movimientos)
-
+    try:
+        if request.method == 'POST':
+            cuenta_movimiento = request.form["cuenta_movimiento"]
+            id_cuenta = Caja_ahorro_comun.get_id_cuenta(cuenta_movimiento)
+            movimientos_resultados = Caja_ahorro_comun.get_listado_movimientos(listado_movimientos,id_cuenta,)
+        return render_template('/views/listar_movimientos_resultados.html',movimientos_resultados=movimientos_resultados)
+    except Exception as e:
+        print("Exception Occured while code Execution: "+ str(e))
+        return render_template('/views/listar_movimientos.html')
 
 #Lanza página listar_saldos.html
 @app.route('/listar_saldos', methods=['GET'])
@@ -114,6 +117,10 @@ def listar_saldos():
 def realizar_deposito():
     return render_template('/views/realizar_deposito.html')
 
+#Lanza página main_page.html
+@app.route('/main_page')
+def main_page():
+    return render_template('/views/main_page.html')
 
 #Lanza página realizar_transferencial.html
 @app.route('/realizar_transferencia')

@@ -38,13 +38,20 @@ class Caja_ahorro_comun(Cuenta):
         usuario_id = usuario_id
         listar_movimientos.execute('select ca.numero_cuenta, ca.tipo_cuenta_id, ts.id, ts.monto, ts.fecha_movimiento, mc.nombre_comision, mc.costo_comision, mo.nombre, mo.precio_compra, mo.precio_venta from transaccion ts join cuenta ca on ts.cuenta_numero_cuenta = ca.numero_cuenta join movimiento_comision mc on mc.id = ts.movimiento_comision_id join moneda mo on mo.id = ts.moneda_id where ts.cuenta_numero_cuenta  =%s',(usuario_id))
         cuenta_movimientos=listar_movimientos.fetchall()
-        print(cuenta_movimientos)
+     #   print(cuenta_movimientos)
         conn.commit()
         return cuenta_movimientos
 
     def get_id_cuenta(numero_cuenta):
         numero_cuenta = numero_cuenta
         numero_cuenta_obtenido = numero_cuenta
-        print(numero_cuenta_obtenido)
         return numero_cuenta_obtenido
+
+    def get_listado_movimientos(array_movimientos, id_cuenta):
+        store_resultados= []
+        print(array_movimientos[0][4])
+        for item in array_movimientos:
+            if int(item[0]) == int(id_cuenta):
+                store_resultados.append(item)
+        return store_resultados
 
