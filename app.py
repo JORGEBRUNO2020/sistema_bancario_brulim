@@ -117,10 +117,6 @@ def listar_saldos():
 def realizar_deposito():
     return render_template('/views/realizar_deposito.html')
 
-#Lanza página main_page.html
-@app.route('/main_page')
-def main_page():
-    return render_template('/views/main_page.html')
 
 #Lanza página realizar_transferencial.html
 @app.route('/realizar_transferencia')

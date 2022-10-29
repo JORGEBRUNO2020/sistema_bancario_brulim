@@ -1,5 +1,3 @@
-{% include '/views/header.html' %}
-
 <style>
     .titulos {
         text-align: center;
@@ -14,23 +12,25 @@
     }
 </style>
 
-<div>
-
-    <h1 style="text-align: center">Listado de Movimientos</h1>
-    <br>
-    <table class="table table-bordered">
-        <tr>
-            <td class="titulos">Id Movimiento</td><td class="titulos">Monto</td><td class="titulos">Fecha Movimiento</td><td class="titulos">Tipo Comisión</td><td class="titulos">Tipo Moneda</td><td class="titulos">Costo Comisión</td><td class="titulos">Precio Compra Moneda</td><td class="titulos">Precio Venta Moneda</td>
-        </tr>
-        {% for listar_movimientos in movimientos_resultados %}
-        <tr>
-            <td class="datos_texto">{{listar_movimientos[2]}}</td><td class="datos_numeros">{{listar_movimientos[3]}}</td><td class="datos_texto">{{listar_movimientos[4]}}</td><td class="datos_texto">{{listar_movimientos[5]}}</td><td class="datos_texto">{{listar_movimientos[7]}}</td><td class="datos_numeros">{{listar_movimientos[6]}}</td><td class="datos_numeros">{{listar_movimientos[8]}}</td><td class="datos_numeros">{{listar_movimientos[9]}}</td>
-            <br>
-        </tr>
-        {% endfor %}
+<div class="page-container">
     
-    </table>
-
-
-
+    {% include '/views/header.html' %} 
+    <div class="content">
+        <div>
+            <h1 style="text-align: center">Listado de Movimientos</h1>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td class="titulos">Id Movimiento</td><td class="titulos">Monto</td><td class="titulos">Fecha Movimiento</td><td class="titulos">Tipo Comisión</td><td class="titulos">Tipo Moneda</td><td class="titulos">Costo Comisión</td>
+            </tr>
+            {% for listar_movimientos in movimientos_resultados %}
+            <tr>
+                <td class="datos_texto">{{listar_movimientos[2]}}</td><td class="datos_numeros">{{listar_movimientos[3]}}</td><td class="datos_texto">{{listar_movimientos[4]}}</td><td class="datos_texto">{{listar_movimientos[5]}}</td><td class="datos_texto">{{listar_movimientos[7]}}</td><td class="datos_numeros">{{listar_movimientos[6]}}</td>
+                <br>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% include '/views/footer.html' %}
+</div>

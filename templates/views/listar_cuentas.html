@@ -1,5 +1,3 @@
-{% include '/views/header.html' %}
-
 <style>
     .titulos {
         text-align: center;
@@ -13,23 +11,25 @@
         text-align: right;   
     }
 </style>
-
-<div>
-    <h1 style="text-align: center">Listado de Cuentas</h1>
-    <br>
+<div class="page-container">
+    
+    {% include '/views/header.html' %} 
+    <div class="content">
+        <div>
+            <h1 style="text-align: center">Listado de Cuentas</h1>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td class="titulos">CBU</td><td class="titulos">Número de Cuenta</td><td class="titulos">Tipo de Cuenta</td><td class="titulos">Fecha de Apertura</td><td class="titulos">Sucursal ID</td><td class="titulos">Dirección</td><td class="titulos">Ciudad</td>
+            </tr>
+            {% for listar_cuentas in listado_cuentas %}
+            <tr>
+                <td class="datos_texto">{{listar_cuentas[0]}}</td><td class="datos_numeros">{{listar_cuentas[1]}}</td><td class="datos_texto">{{listar_cuentas[3]}}</td><td class="datos_texto">{{listar_cuentas[4]}}</td><td class="datos_texto">{{listar_cuentas[2]}}</td><td class="datos_texto">{{listar_cuentas[5]}}</td><td class="datos_texto">{{listar_cuentas[6]}}</td>
+                <br>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% include '/views/footer.html' %}
 </div>
-<table class="table table-bordered">
-    <tr>
-        <td class="titulos">CBU</td><td class="titulos">Número de Cuenta</td><td class="titulos">Tipo de Cuenta</td><td class="titulos">Fecha de Apertura</td><td class="titulos">Sucursal ID</td><td class="titulos">Dirección</td><td class="titulos">Ciudad</td>
-    </tr>
-    {% for listar_cuentas in listado_cuentas %}
-    <tr>
-        <td class="datos_texto">{{listar_cuentas[0]}}</td><td class="datos_numeros">{{listar_cuentas[1]}}</td><td class="datos_texto">{{listar_cuentas[3]}}</td><td class="datos_texto">{{listar_cuentas[4]}}</td><td class="datos_texto">{{listar_cuentas[2]}}</td><td class="datos_texto">{{listar_cuentas[5]}}</td><td class="datos_texto">{{listar_cuentas[6]}}</td>
-        <br>
-    </tr>
-    {% endfor %}
-
-</table>
-
-
-{% include '/views/footer.html' %}

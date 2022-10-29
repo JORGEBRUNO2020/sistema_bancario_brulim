@@ -1,5 +1,3 @@
-{% include '/views/header.html' %}
-
 <style>
     .titulos {
         text-align: center;
@@ -17,20 +15,22 @@
         align-items: center;
     }
 </style>
+<div class="page-container">
+    
+    {% include '/views/header.html' %} 
+    <div class="content">
+        <div>
+            <h1 style="text-align: center">Listado de Movimientos</h1>
+            <br>
+        </div>
+        <div>
+            <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese el Número de Cuenta</h1>
+            <label for="inputEmail" class="sr-only"></label>
+            <form class="form-signin" action="/listar_movimientos" method="post">
+                <input type="" name="cuenta_movimiento" id="cuenta_movimiento" class="form-control" placeholder="Ingrese Aquí" required autofocus>
+                <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Aceptar</button>
+            </form>
+        </div>
 
-<div>
-
-    <h1 style="text-align: center">Listado de Movimientos</h1>
-    <br>
+    {% include '/views/footer.html' %}
 </div>
-    <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese el Número de Cuenta</h1>
-    <label for="inputEmail" class="sr-only"></label>
-<form class="form-signin" action="/listar_movimientos" method="post">
-    <input type="" name="cuenta_movimiento" id="cuenta_movimiento" class="form-control" placeholder="Ingrese Aquí" required autofocus>
-    <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Aceptar</button>
-</form>
-
-
-
-
-{% include '/views/footer.html' %}
