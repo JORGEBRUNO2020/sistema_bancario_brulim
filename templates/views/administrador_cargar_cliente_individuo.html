@@ -29,7 +29,7 @@
             <!-- <form class="form-signin" action='/administrador_cargar_cliente_individuo' method="post"> -->
             <form enctype="multipart/form-data" action='/administrador_cargar_cliente_individuo' method="post">
                 <label for="inputcuit_cuil" class="sr-only">Cuit_cuit</label>
-                <input type="" name="cuit_cuil" id="cuit_cuil" class="form-control" placeholder="cuit_cuil" required autofocus>
+                <input type="number" name="cuit_cuil" id="cuit_cuil" class="form-control" placeholder="cuit_cuil" required autofocus>
                 <label for="inputdni" class="sr-only">D.N.I.</label>
                 <input type="text" name="dni" id="dni" class="form-control" placeholder="dni" required autofocus>
                 <label for="inputNombre" class="sr-only">Nombre</label>
@@ -42,6 +42,10 @@
                 <input type="text"  name="telefono" id="telefono" class="form-control" placeholder="telefono" required autofocus>
                 <label for="inputEmail" class="sr-only">Email</label>
                 <input type="text"  name="email" id="email" class="form-control" placeholder="email" required autofocus>
+                <label for="inputusuario" class="sr-only">Usuario</label>
+                <input type="text"  name="usuario" id="usuario" class="form-control" placeholder="nombre de usuario" required autofocus>
+                <label for="inputpassword" class="sr-only">Password</label>
+                <input type="text"  name="password" id="password" class="form-control" placeholder="password" required autofocus>
 
                 
                 <button class="btn btn-lg btn-secondary btn-block" type="submit">Enviar</button>

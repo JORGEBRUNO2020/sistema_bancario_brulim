@@ -166,16 +166,21 @@ def administrador_cargar_cliente_individuo():
     if  request.method == 'POST':
 
         _cuitcuil = request.form['cuit_cuil']
-        _password = request.form['dni']
+        _dni = request.form['dni']
         _nombre = request.form['nombre']
         _apellido = request.form['apellido']
         _telefono = request.form['telefono']
         _email = request.form['email']
+        _nombre_usuario = request.form['usuario']
+        _password = request.form['password']
 
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
 
-        nuevo_individuo = Administrador.get_cliente_individuo(conn, cargar_individuo, _cuitcuil, _password, _nombre, _apellido, _telefono, _email)
+        nuevo_usuario = Administrador.set_usuario(conn, cargar_individuo)
+
+        nuevo_individuo = Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
+        nuevo_login = Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
 
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
