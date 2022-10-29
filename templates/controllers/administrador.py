@@ -32,8 +32,8 @@ class Administrador(Usuario):
         pass
 
     def set_datos_cliente_individuo(conn, cargar_individuo, cuitcuil, dni, nombre, apellido, telefono, email):
-        query = "INSERT INTO  datos_usuario values (%s,%s, %s, %s, %s, %s, %s, %s)"
-        datos = (cuitcuil, dni, nombre, apellido, '',telefono, email, "2")
+        query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
+        datos = (cuitcuil, dni, nombre, apellido, '',telefono, email, 9)
         
         cargar_individuo.execute(query, datos) 
         
@@ -46,7 +46,7 @@ class Administrador(Usuario):
 
     def set_login(conn, cargar_individuo, nombre_usuario, password):
         query = "INSERT INTO  login values ( %s,%s, %s)"
-        datos = (nombre_usuario, password, 4)
+        datos = (nombre_usuario, password, 9)
         
         cargar_individuo.execute(query, datos) 
         
