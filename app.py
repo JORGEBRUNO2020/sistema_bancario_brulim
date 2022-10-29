@@ -1,4 +1,6 @@
 
+
+import mysql.connector
 from flask import Flask
 from flask import render_template,request,redirect
 from flaskext.mysql import MySQL
@@ -9,6 +11,9 @@ from templates.controllers.usuarios import *
 from templates.controllers.banco import *
 from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
+
+
+
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -25,6 +30,19 @@ app.config['MYSQL_DATABASE_USER']='root'
 app.config['MYSQL_DATABASE_PASSWORD']=''
 app.config['MYSQL_DATABASE_DB']='sistema_bancario'
 mysql.init_app(app)
+
+
+# def conectar_maria_db():
+#     consql = mysql.connector.connect(
+#         host = 'localhost',
+#         user = 'root',
+#         passwd = '',
+#         db = 'sistema_bancario'
+#     )
+#     return consql
+
+
+# conexion = MySQL(app)
 
 carpeta_imagenes = os.path.join('/templates/images')
 app.config['carpeta_imagenes'] = carpeta_imagenes
@@ -86,7 +104,6 @@ def listar_cuentas():
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
 
-
 #Lanza página listar_movimientos.html
 @app.route('/listar_movimientos', methods=['POST','GET'])
 def listar_movimientos():
@@ -141,10 +158,30 @@ def administrador():
     return render_template('/views/administrador_main.html')
 
 #Lanza página administrador_cargar_cliente_individuo.html
-@app.route('/administrador_cargar_cliente_individuo')
+@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
 def administrador_cargar_cliente_individuo():
-    return render_template('/views/administrador_cargar_cliente_individuo.html')
+    
+    if  request.method == 'POST':
+        _cuitcuil = request.form['cuit_cuil']
+        
+        _password = request.form['dni']
+        _nombre = request.form['nombre']
+        _apellido = request.form['apellido']
+        _razon_social = request.form['razon_social']
+        _telefono = request.form['telefono']
+        _email = request.form['email']
+    
+        query = "INSERT INTO  datos_usuario values (%s,%s, %s, %s, %s, %s, %s, %s)"
+        datos = (_cuitcuil, _password, _nombre, _apellido, _razon_social ,_telefono, _email, "2")
+        conn = mysql.connect()
+        cargar_individuo = conn.cursor()
+        cargar_individuo.execute(query, datos) 
+        conn.commit()
 
+        return render_template('/views/administrador_cargar_cliente_individuo.html')
+    else:
+        return render_template('/views/administrador_cargar_cliente_individuo.html')
+    
 #Lanza página administrador_cargar_cliente_pyme.html
 @app.route('/administrador_cargar_cliente_pyme')
 def administrador_cargar_cliente_pyme():
