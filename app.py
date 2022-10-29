@@ -7,10 +7,12 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
+# from sistema_bancario_brulim.templates.controllers.administrador import Administrador
 from templates.controllers.usuarios import *
 from templates.controllers.banco import *
 from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
+from templates.controllers.administrador import *
 
 
 
@@ -162,21 +164,18 @@ def administrador():
 def administrador_cargar_cliente_individuo():
     
     if  request.method == 'POST':
+
         _cuitcuil = request.form['cuit_cuil']
-        
         _password = request.form['dni']
         _nombre = request.form['nombre']
         _apellido = request.form['apellido']
-        _razon_social = request.form['razon_social']
         _telefono = request.form['telefono']
         _email = request.form['email']
-    
-        query = "INSERT INTO  datos_usuario values (%s,%s, %s, %s, %s, %s, %s, %s)"
-        datos = (_cuitcuil, _password, _nombre, _apellido, _razon_social ,_telefono, _email, "2")
+
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
-        cargar_individuo.execute(query, datos) 
-        conn.commit()
+
+        nuevo_individuo = Administrador.get_cliente_individuo(conn, cargar_individuo, _cuitcuil, _password, _nombre, _apellido, _telefono, _email)
 
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
