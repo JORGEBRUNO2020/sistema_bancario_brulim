@@ -12,7 +12,6 @@
     }
 </style>
 <div class="page-container">
-    
     {% include '/views/administrador_header.html' %} 
     <div class="content">
         <div>
@@ -27,10 +26,8 @@
             {% for listar_saldos in listado_todas_cuentas %}
             <tr>
                 <td class="datos_texto">{{listar_saldos[0]}}</td><td class="datos_texto">{{listar_saldos[1]}}</td><td class="datos_texto">{{listar_saldos[2]}}</td><td class="datos_texto">{{listar_saldos[3]}}</td><td class="datos_texto">{{listar_saldos[4]}}</td><td class="datos_numeros">{{listar_saldos[5]}}</td>
-                <br>
             </tr>
             {% endfor %}
-
         </table>
     </div>
     {% include '/views/footer.html' %}

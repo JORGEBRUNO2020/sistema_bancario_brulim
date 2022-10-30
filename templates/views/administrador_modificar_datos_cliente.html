@@ -1,7 +1,6 @@
-{% include '/views/administrador_header.html' %}
-
-<div id="mySidenav" class="sidenav">
-
+<div class="page-container">
+    {% include '/views/administrador_header.html' %}  
+    <div class="content">
     <form action="">
         <input type="text" name="nombre_usuario" placeholder="Nombre Usuario"/>
         <input type="text" name="password" placeholder="Password"/>
@@ -12,11 +11,8 @@
         <input type="text" name="mail" placeholder="email"/>
 
         <button>Save</button>
-
-
     </form>
-  
+        
+    </div> 
+    {% include '/views/footer.html' %}
 </div>
-
-
-{% include '/views/footer.html' %}

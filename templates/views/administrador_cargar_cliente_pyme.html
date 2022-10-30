@@ -20,30 +20,27 @@
     {% include '/views/administrador_header.html' %}
     <div class="content">
         <div>
-            <h1 style="text-align: center">Carga de cliente Pyme</h1>
+            <h1 style="text-align: center">Carga de Cliente PyME</h1>
             <br>
         </div>
         <div>
-            <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c">Ingrese los datos del cliente (PYME)</h1>
+            <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c;  text-align: center">Ingrese los Datos</h1>
             <label for="inputEmail" class="sr-only"></label>
             <form enctype="multipart/form-data" action='/administrador_cargar_cliente_pyme' method="post">
                 <label for="inputcuit_cuil" class="sr-only">Cuit_cuit</label>
-                <input type="number" name="cuit_cuil" id="cuit_cuil" class="form-control" placeholder="cuit_cuil" required autofocus>
+                <input type="number" name="cuit_cuil" id="cuit_cuil" class="form-control" placeholder="CUIT" required autofocus style="width: 300px;">
                 <label for="inputrazon_social" class="sr-only">Razón socail</label>
-                <input type="text" name="razon_social" id="razon_social" class="form-control" placeholder="razon_social" required autofocus>
+                <input type="text" name="razon_social" id="razon_social" class="form-control" placeholder="Razón Social" required autofocus style="width: 300px;">
                 <label for="inputTelefono" class="sr-only">Telefono</label>
-                <input type="text"  name="telefono" id="telefono" class="form-control" placeholder="telefono" required autofocus>
+                <input type="text"  name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required autofocus style="width: 300px;">
                 <label for="inputEmail" class="sr-only">Email</label>
-                <input type="text"  name="email" id="email" class="form-control" placeholder="email" required autofocus>
+                <input type="text"  name="email" id="email" class="form-control" placeholder="Email" required autofocus style="width: 300px;">
                 <label for="inputusuario" class="sr-only">Usuario</label>
-                <input type="text"  name="usuario" id="usuario" class="form-control" placeholder="nombre de usuario" required autofocus>
+                <input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus style="width: 300px;">
                 <label for="inputpassword" class="sr-only">Password</label>
-                <input type="text"  name="password" id="password" class="form-control" placeholder="password" required autofocus>
-
-                
-                <button class="btn btn-lg btn-secondary btn-block" type="submit">Enviar</button>
-                
-
+                <input type="text"  name="password" id="password" class="form-control" placeholder="Password" required autofocus style="width: 300px;">
+        
+                <button class="btn btn-lg btn-secondary btn-block" type="submit" style="width: 300px;">Enviar</button>
             </form>
         </div>
 
