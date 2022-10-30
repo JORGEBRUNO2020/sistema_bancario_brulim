@@ -37,7 +37,7 @@ class Administrador(Usuario):
     def set_datos_cliente_individuo(conn, cargar_individuo, cuitcuil, dni, nombre, apellido, telefono, email):
         cargar_individuo.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_individuo.fetchall()
-        print(ultimo[0][0])
+        print(ultimo[0][0]) # BORRAR
         query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
         datos = (cuitcuil, dni, nombre, apellido, '',telefono, email, ultimo[0][0])
         
@@ -51,9 +51,12 @@ class Administrador(Usuario):
         pass
 
     def set_login(conn, cargar_individuo, nombre_usuario, password):
-        query = "INSERT INTO  login values ( %s,%s, %s)"
 
-        ultimo = cargar_individuo.execute("SELECT * FROM sistema_bancario.usuario WHERE id=(SELECT max(id) FROM usuario)")
+        ultimo = cargar_individuo.execute("SELECT max(id) FROM usuario")
+        ultimo = cargar_individuo.fetchall() 
+        print(ultimo[0][0]) #BORRAR
+
+        query = "INSERT INTO  login values ( %s,%s, %s)"
         datos = (nombre_usuario, password, ultimo)
         
         cargar_individuo.execute(query, datos) 
