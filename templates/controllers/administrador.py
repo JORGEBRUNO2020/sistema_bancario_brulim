@@ -46,8 +46,21 @@ class Administrador(Usuario):
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
 
+    def set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email):
+        cargar_pyme.execute("SELECT max(id) FROM usuario")
+        ultimo = cargar_pyme.fetchall()
+        print(ultimo[0][0]) # BORRAR
 
-    def set_costos_mantenimiento():
+        query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
+        datos = (_cuitcuil, '', '', '', _razon_social, _telefono, _email, ultimo[0][0])
+        
+        cargar_pyme.execute(query, datos) 
+        
+        conn.commit()
+        return render_template('/views/administrador_cargar_cliente_pyme.html')
+
+    def set_costos_mantenimiento(conn, cargar_pyme, cuitcuil, razon_social, telefono, email):
+
         pass
 
     def set_login(conn, cargar_individuo, nombre_usuario, password):
@@ -64,9 +77,9 @@ class Administrador(Usuario):
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     
-    def set_usuario(conn, cargar_individuo):
+    def set_usuario(conn, cargar_individuo, tipo):
         
-        cargar_individuo.execute("insert into usuario (estado, tipo_usuario_id) values ( 1,1)")
+        cargar_individuo.execute("insert into usuario (estado, tipo_usuario_id) values ( 1,%s)", tipo)
 
         conn.commit()
 
