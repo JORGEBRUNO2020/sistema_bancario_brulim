@@ -168,10 +168,8 @@ def administrador():
 
 #Lanza página administrador_cargar_cliente_individuo.html
 @app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
-def administrador_cargar_cliente_individuo():
-    
+def administrador_cargar_cliente_individuo():   
     if  request.method == 'POST':
-
         _cuitcuil = request.form['cuit_cuil']
         _dni = request.form['dni']
         _nombre = request.form['nombre']
@@ -180,13 +178,9 @@ def administrador_cargar_cliente_individuo():
         _email = request.form['email']
         _nombre_usuario = request.form['usuario']
         _password = request.form['password']
-
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
-        tipo = 1
-
-        Administrador.set_usuario(conn, cargar_individuo, tipo)
-
+        Administrador.set_usuario(conn, cargar_individuo, 1)
         Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
         Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
 
@@ -198,22 +192,17 @@ def administrador_cargar_cliente_individuo():
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])
 def administrador_cargar_cliente_pyme():
     if  request.method == 'POST':
-
         _cuitcuil = request.form['cuit_cuil']
         _razon_social = request.form['razon_social']
         _telefono = request.form['telefono']
         _email = request.form['email']
         _nombre_usuario = request.form['usuario']
         _password = request.form['password']
-
         conn = mysql.connect()
         cargar_pyme = conn.cursor()
-        tipo = 2
-
-        Administrador.set_usuario(conn, cargar_pyme, tipo)
+        Administrador.set_usuario(conn, cargar_pyme, 2)
         Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
         Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
-
         return render_template('/views/administrador_cargar_cliente_pyme.html')
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')
