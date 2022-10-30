@@ -86,12 +86,7 @@ def listar_cuentas():
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
-@app.route('/administrador_listar_cuentas', methods=['GET'])
-def listar_todas_las_cuentas():
-    conn= mysql.connect()
-    listar_todas_cuentas=conn.cursor()
-    listado_todas_cuentas=Cuenta.get_todas_las_cuentas(listar_todas_cuentas, conn)
-    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas )
+
 
 
 #Lanza página listar_movimientos.html
@@ -148,7 +143,7 @@ def administrador():
     return render_template('/views/administrador_main.html')
 
 #Lanza página administrador_cargar_cliente_individuo.html
-@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
+@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  
 def administrador_cargar_cliente_individuo():   
     if  request.method == 'POST':
         _cuitcuil = request.form['cuit_cuil']
@@ -192,7 +187,12 @@ def administrador_cargar_cliente_pyme():
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
-    
+@app.route('/administrador_listar_saldos', methods=['GET'])
+def listar_todos_los_saldos():
+    conn= mysql.connect()
+    listar_todos_saldos=conn.cursor()
+    listado_todos_saldos=Cuenta.get_todos_los_saldos(listar_todos_saldos, conn)
+    return render_template('/views/administrador_listar_saldos.html',listado_todos_saldos=listado_todos_saldos )
 
 #Lanza página administrador_listar_cuentas.html
 @app.route('/administrador_listar_cuentas')
@@ -200,9 +200,9 @@ def administrador_listar_cuentas():
     return render_template('/views/administrador_listar_cuentas.html')
 
 #Lanza página administrador_listar_saldos.html
-@app.route('/administrador_listar_saldos')
-def administrador_listar_saldos():
-    return render_template('/views/administrador_listar_saldos.html')
+# @app.route('/administrador_listar_saldos')
+# def administrador_listar_saldos():
+#     return render_template('/views/administrador_listar_saldos.html')
 
 #Lanza página administrador_listar_movimientos.html
 @app.route('/administrador_listar_movimientos')

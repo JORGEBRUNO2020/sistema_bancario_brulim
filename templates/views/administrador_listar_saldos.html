@@ -1,9 +1,34 @@
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
 <div class="page-container">
-    {% include '/views/administrador_header.html' %}  
+    {% include '/views/administrador_header.html' %} 
     <div class="content">
-
-
-        
-    </div> 
+        <div>
+            <h1 style="text-align: center">Listado de Todos los Saldos</h1>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td class="titulos">id Cliente</td><td class="titulos">Nombre</td><td class="titulos">Apellido</td>
+                <td class="titulos">Razón Social</td><td class="titulos">N° Cuenta</td><td class="titulos">Saldo</td>
+            </tr>
+            {% for listar_saldos in listado_todos_saldos %}
+            <tr>
+                <td class="datos_texto">{{listar_saldos[0]}}</td><td class="datos_texto">{{listar_saldos[1]}}</td><td class="datos_texto">{{listar_saldos[2]}}</td><td class="datos_texto">{{listar_saldos[3]}}</td><td class="datos_texto">{{listar_saldos[4]}}</td><td class="datos_numeros">{{listar_saldos[5]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
     {% include '/views/footer.html' %}
 </div>
