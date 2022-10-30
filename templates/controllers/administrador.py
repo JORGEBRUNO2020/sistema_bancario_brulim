@@ -37,25 +37,18 @@ class Administrador(Usuario):
     def set_datos_cliente_individuo(conn, cargar_individuo, cuitcuil, dni, nombre, apellido, telefono, email):
         cargar_individuo.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_individuo.fetchall()
-        print(ultimo[0][0]) # BORRAR
         query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
         datos = (cuitcuil, dni, nombre, apellido, '',telefono, email, ultimo[0][0])
-        
         cargar_individuo.execute(query, datos) 
-        
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
 
     def set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email):
         cargar_pyme.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_pyme.fetchall()
-        
-
         query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
-        datos = (_cuitcuil, '', '', '', _razon_social, _telefono, _email, ultimo[0][0])
-        
-        cargar_pyme.execute(query, datos) 
-        
+        datos = (_cuitcuil, '', '', '', _razon_social, _telefono, _email, ultimo[0][0])      
+        cargar_pyme.execute(query, datos)     
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
@@ -67,22 +60,15 @@ class Administrador(Usuario):
 
         ultimo = cargar_individuo.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_individuo.fetchall() 
-        
-
         query = "INSERT INTO  login values ( %s,%s, %s)"
-        datos = (nombre_usuario, password, ultimo[0][0])
-        
+        datos = (nombre_usuario, password, ultimo[0][0]) 
         cargar_individuo.execute(query, datos) 
-        
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     
     def set_usuario(conn, cargar_individuo, tipo):
-        
         cargar_individuo.execute("insert into usuario (estado, tipo_usuario_id) values ( 1,%s)", tipo)
-
         conn.commit()
-
         return render_template('/views/administrador_cargar_cliente_individuo.html')
 
 

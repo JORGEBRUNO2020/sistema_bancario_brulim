@@ -1,5 +1,3 @@
-
-
 import mysql.connector
 from flask import Flask
 from flask import render_template,request,redirect
@@ -7,15 +5,11 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
-# from sistema_bancario_brulim.templates.controllers.administrador import Administrador
 from templates.controllers.usuarios import *
 from templates.controllers.banco import *
 from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
 from templates.controllers.administrador import *
-
-
-
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -32,19 +26,6 @@ app.config['MYSQL_DATABASE_USER']='root'
 app.config['MYSQL_DATABASE_PASSWORD']=''
 app.config['MYSQL_DATABASE_DB']='sistema_bancario'
 mysql.init_app(app)
-
-
-# def conectar_maria_db():
-#     consql = mysql.connector.connect(
-#         host = 'localhost',
-#         user = 'root',
-#         passwd = '',
-#         db = 'sistema_bancario'
-#     )
-#     return consql
-
-
-# conexion = MySQL(app)
 
 carpeta_imagenes = os.path.join('/templates/images')
 app.config['carpeta_imagenes'] = carpeta_imagenes
@@ -176,12 +157,11 @@ def administrador_cargar_cliente_individuo():
 
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
-        tipo = 1
 
-        nuevo_usuario = Administrador.set_usuario(conn, cargar_individuo, tipo)
+        Administrador.set_usuario(conn, cargar_individuo, 1)
 
-        nuevo_individuo = Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
-        nuevo_login = Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
+        Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
+        Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
 
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
@@ -201,11 +181,10 @@ def administrador_cargar_cliente_pyme():
 
         conn = mysql.connect()
         cargar_pyme = conn.cursor()
-        tipo = 2
 
-        nuevo_usuario = Administrador.set_usuario(conn, cargar_pyme, tipo)
-        nueva_pyme = Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
-        nuevo_login = Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
+        Administrador.set_usuario(conn, cargar_pyme, 2)
+        Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
+        Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
 
         return render_template('/views/administrador_cargar_cliente_pyme.html')
     else:
