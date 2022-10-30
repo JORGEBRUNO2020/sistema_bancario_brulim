@@ -49,7 +49,7 @@ class Administrador(Usuario):
     def set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email):
         cargar_pyme.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_pyme.fetchall()
-        print(ultimo[0][0]) # BORRAR
+        
 
         query = "INSERT INTO  datos_usuario (cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id) values (%s,%s, %s, %s, %s, %s, %s, %s)"
         datos = (_cuitcuil, '', '', '', _razon_social, _telefono, _email, ultimo[0][0])
@@ -59,7 +59,7 @@ class Administrador(Usuario):
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
-    def set_costos_mantenimiento(conn, cargar_pyme, cuitcuil, razon_social, telefono, email):
+    def set_costos_mantenimiento():
 
         pass
 
@@ -67,10 +67,10 @@ class Administrador(Usuario):
 
         ultimo = cargar_individuo.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_individuo.fetchall() 
-        print(ultimo[0][0]) #BORRAR
+        
 
         query = "INSERT INTO  login values ( %s,%s, %s)"
-        datos = (nombre_usuario, password, ultimo)
+        datos = (nombre_usuario, password, ultimo[0][0])
         
         cargar_individuo.execute(query, datos) 
         
