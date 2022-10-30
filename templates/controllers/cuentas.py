@@ -17,6 +17,13 @@ class Cuenta():
         listado_cuentas=listar_cuentas.fetchall()
         conn.commit()
         return listado_cuentas
+
+    def get_todas_las_cuentas(listar_cuentas, conn): # hay que acomodar la consulta
+        listar_cuentas.execute('select us.id, du.nombre, du.apellido, du.razon_social, ca.numero_cuenta, ca.saldo from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta ca ') # on ca.usuario_id = us.id where us.id = 1
+        listado_todas_cuentas=listar_cuentas.fetchall()
+        conn.commit()
+        return listado_todas_cuentas
+
     
     def get_saldo():
         pass

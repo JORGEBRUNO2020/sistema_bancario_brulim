@@ -105,6 +105,13 @@ def listar_cuentas():
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
+@app.route('/administrador_listar_cuentas', methods=['GET'])
+def listar_todas_las_cuentas():
+    conn= mysql.connect()
+    listar_todas_cuentas=conn.cursor()
+    listado_todas_cuentas=Cuenta.get_todas_las_cuentas(listar_todas_cuentas, conn)
+    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas )
+
 
 #Lanza página listar_movimientos.html
 @app.route('/listar_movimientos', methods=['POST','GET'])
@@ -178,10 +185,10 @@ def administrador_cargar_cliente_individuo():
         cargar_individuo = conn.cursor()
         tipo = 1
 
-        nuevo_usuario = Administrador.set_usuario(conn, cargar_individuo, tipo)
+        Administrador.set_usuario(conn, cargar_individuo, tipo)
 
-        nuevo_individuo = Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
-        nuevo_login = Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
+        Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
+        Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
 
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
@@ -203,9 +210,9 @@ def administrador_cargar_cliente_pyme():
         cargar_pyme = conn.cursor()
         tipo = 2
 
-        nuevo_usuario = Administrador.set_usuario(conn, cargar_pyme, tipo)
-        nueva_pyme = Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
-        nuevo_login = Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
+        Administrador.set_usuario(conn, cargar_pyme, tipo)
+        Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
+        Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
 
         return render_template('/views/administrador_cargar_cliente_pyme.html')
     else:
