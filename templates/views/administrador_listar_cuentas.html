@@ -1,8 +1,37 @@
-{% include '/views/administrador_header.html' %}
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
+<div class="page-container">
+    
+    {% include '/views/administrador_header.html' %} 
+    <div class="content">
+        <div>
+            <h1 style="text-align: center">Listado de Todas las Cuentas</h1>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td class="titulos">id Cliente</td><td class="titulos">Nombre</td><td class="titulos">Apellido</td>
+                <td class="titulos">Razón Social</td><td class="titulos">N° Cuenta</td><td class="titulos">Saldo</td>
+            </tr>
+            {% for listar_saldos in listado_todas_cuentas %}
+            <tr>
+                <td class="datos_texto">{{listar_saldos[0]}}</td><td class="datos_texto">{{listar_saldos[1]}}</td><td class="datos_texto">{{listar_saldos[2]}}</td><td class="datos_texto">{{listar_saldos[3]}}</td><td class="datos_texto">{{listar_saldos[4]}}</td><td class="datos_numeros">{{listar_saldos[5]}}</td>
+                <br>
+            </tr>
+            {% endfor %}
 
-<div id="mySidenav" class="sidenav">
-  
+        </table>
+    </div>
+    {% include '/views/footer.html' %}
 </div>
-
-
-{% include '/views/footer.html' %}

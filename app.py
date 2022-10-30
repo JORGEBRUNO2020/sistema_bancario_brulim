@@ -86,6 +86,13 @@ def listar_cuentas():
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
+@app.route('/administrador_listar_cuentas', methods=['GET'])
+def listar_todas_las_cuentas():
+    conn= mysql.connect()
+    listar_todas_cuentas=conn.cursor()
+    listado_todas_cuentas=Cuenta.get_todas_las_cuentas(listar_todas_cuentas, conn)
+    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas )
+
 
 #Lanza página listar_movimientos.html
 @app.route('/listar_movimientos', methods=['POST','GET'])
@@ -142,10 +149,8 @@ def administrador():
 
 #Lanza página administrador_cargar_cliente_individuo.html
 @app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
-def administrador_cargar_cliente_individuo():
-    
+def administrador_cargar_cliente_individuo():   
     if  request.method == 'POST':
-
         _cuitcuil = request.form['cuit_cuil']
         _dni = request.form['dni']
         _nombre = request.form['nombre']
@@ -154,7 +159,6 @@ def administrador_cargar_cliente_individuo():
         _email = request.form['email']
         _nombre_usuario = request.form['usuario']
         _password = request.form['password']
-
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
 
@@ -171,14 +175,12 @@ def administrador_cargar_cliente_individuo():
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])
 def administrador_cargar_cliente_pyme():
     if  request.method == 'POST':
-
         _cuitcuil = request.form['cuit_cuil']
         _razon_social = request.form['razon_social']
         _telefono = request.form['telefono']
         _email = request.form['email']
         _nombre_usuario = request.form['usuario']
         _password = request.form['password']
-
         conn = mysql.connect()
         cargar_pyme = conn.cursor()
 
