@@ -204,6 +204,14 @@ def administrador_listar_cuentas():
 # def administrador_listar_saldos():
 #     return render_template('/views/administrador_listar_saldos.html')
 
+#Lanza página administrador_listar_usuarios.html
+@app.route('/administrador_listar_usuarios', methods=['GET'])
+def administrador_listar_usuarios():
+    conn= mysql.connect()
+    listar_usuarios=conn.cursor()
+    listado_usuarios=Usuario.get_usuarios(listar_usuarios, conn)
+    return render_template('/views/administrador_listar_usuarios.html', listado_usuarios = listado_usuarios)
+
 #Lanza página administrador_listar_movimientos.html
 @app.route('/administrador_listar_movimientos')
 def administrador_listar_movimientos():

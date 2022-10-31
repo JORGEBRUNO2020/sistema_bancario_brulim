@@ -1,0 +1,34 @@
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
+<div class="page-container">
+    {% include '/views/administrador_header.html' %} 
+    <div class="content">
+        <div>
+            <h1 style="text-align: center">Listado de Todos los Usuarios</h1>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td class="titulos">id Usuario</td><td class="titulos">Nombre</td><td class="titulos">Apellido</td>
+                <td class="titulos">Razón Social</td><td class="titulos">Tipo de Usuario</td>
+            </tr>
+            {% for listar_usuarios in listado_usuarios %}
+            <tr>
+                <td class="datos_texto">{{listar_usuarios[0]}}</td><td class="datos_texto">{{listar_usuarios[1]}}</td><td class="datos_texto">{{listar_usuarios[2]}}</td><td class="datos_texto">{{listar_usuarios[3]}}</td><td class="datos_texto">{{listar_usuarios[4]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% include '/views/footer.html' %}
+</div>
