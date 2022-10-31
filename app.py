@@ -73,8 +73,10 @@ def login():
         return render_template('/views/login.html')
 
 #Lanza página crear_cuenta.html
-@app.route('/crear_cuenta')
+@app.route('/crear_cuenta', methods=['GET'])
 def crear_cuenta():
+    conn= mysql.connect()
+
     return render_template('/views/crear_cuenta.html')
 
 

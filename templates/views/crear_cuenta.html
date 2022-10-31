@@ -1,10 +1,35 @@
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
 <div class="page-container">
-{% include '/views/header.html' %}
-
+    
+    {% include '/views/header.html' %} 
     <div class="content">
-
+        <div>
+            <h1 style="text-align: center">Crear una cuenta</h1>
+            <br>
+        </div>
+        <body>
+            <label for="Cuenta">Escoja el tipo de cuenta que desea abrir </label>
+            <select name="Cuenta tipo: ">
+                <option value="Caja_ahorro_comun">Caja de Ahorro Común</option>
+                <option value="Caja_ahorro_sr">Caja de Ahorro con Saldo Retenido</option>
+                <option value="Cuenta_corriente">Cuenta Corriente</option>
+                <option value="Cuenta_corriente_sr">Cuenta Corriente con Saldo Retenido</option>
+            </select>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Aceptar</button>
+        </body>
+       
     </div>
-
-
-{% include '/views/footer.html' %}
+    {% include '/views/footer.html' %}
 </div>
