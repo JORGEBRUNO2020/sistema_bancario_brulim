@@ -59,6 +59,7 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
+    print(valido)
     try:
         if valido[0] == 1 and valido[1][0][4] != 'Administrador':
             valor_variable(valido[1][0][2])
@@ -161,12 +162,9 @@ def administrador_cargar_cliente_individuo():
         _password = request.form['password']
         conn = mysql.connect()
         cargar_individuo = conn.cursor()
-
         Administrador.set_usuario(conn, cargar_individuo, 1)
-
         Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
         Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
-
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
         return render_template('/views/administrador_cargar_cliente_individuo.html')
@@ -183,7 +181,6 @@ def administrador_cargar_cliente_pyme():
         _password = request.form['password']
         conn = mysql.connect()
         cargar_pyme = conn.cursor()
-
         Administrador.set_usuario(conn, cargar_pyme, 2)
         Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
         Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)

@@ -30,9 +30,6 @@ class Administrador(Usuario):
 
     def get_saldo():
         pass
-    
-
-
 
     def set_datos_cliente_individuo(conn, cargar_individuo, cuitcuil, dni, nombre, apellido, telefono, email):
         cargar_individuo.execute("SELECT max(id) FROM usuario")
@@ -67,10 +64,7 @@ class Administrador(Usuario):
         return render_template('/views/administrador_cargar_cliente_individuo.html')
     
     def set_usuario(conn, cargar_individuo, tipo):
-        cargar_individuo.execute("insert into usuario (estado, tipo_usuario_id) values ( 1,%s)", tipo)
+        cargar_individuo.execute("insert into usuario (estado, tipo_usuario_id) values ( 1,%s)", int(tipo))
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
 
-
-    # def set_password():
-    #     pass

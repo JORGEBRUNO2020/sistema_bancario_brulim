@@ -9,7 +9,7 @@ class Banco():
 
     def validar_login(cursor, conn, _usuario, _password):
         validacion = []
-        cursor.execute("select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo  from login lg join usuario us on lg.usuario_id = us.id join tipo_usuario tu on tu.id = us.id where lg.nombre_usuario=%s",(_usuario))
+        cursor.execute("select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo from login lg join usuario us on lg.usuario_id = us.id join tipo_usuario tu on tu.id = us.tipo_usuario_id  where lg.nombre_usuario=%s",(_usuario))
         password=cursor.fetchall()
         conn.commit()
         try: 
