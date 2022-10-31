@@ -23,9 +23,9 @@
                 <td class="titulos">id Cliente</td><td class="titulos">Nombre</td><td class="titulos">Apellido</td>
                 <td class="titulos">Razón Social</td><td class="titulos">N° Cuenta</td><td class="titulos">Saldo</td>
             </tr>
-            {% for listar_saldos in listado_todas_cuentas %}
+            {% for listar_cuentas in listado_todas_cuentas %}
             <tr>
-                <td class="datos_texto">{{listar_saldos[0]}}</td><td class="datos_texto">{{listar_saldos[1]}}</td><td class="datos_texto">{{listar_saldos[2]}}</td><td class="datos_texto">{{listar_saldos[3]}}</td><td class="datos_texto">{{listar_saldos[4]}}</td><td class="datos_numeros">{{listar_saldos[5]}}</td>
+                <td class="datos_texto">{{listar_cuentas[0]}}</td><td class="datos_texto">{{listar_cuentas[1]}}</td><td class="datos_texto">{{listar_cuentas[2]}}</td><td class="datos_texto">{{listar_cuentas[3]}}</td><td class="datos_texto">{{listar_cuentas[4]}}</td><td class="datos_numeros">{{listar_cuentas[6]}}</td>
             </tr>
             {% endfor %}
         </table>

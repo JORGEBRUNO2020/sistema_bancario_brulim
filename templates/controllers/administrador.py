@@ -53,7 +53,6 @@ class Administrador(Usuario):
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
     def set_costos_mantenimiento():
-
         pass
 
     def set_login(conn, cargar_individuo, nombre_usuario, password):
@@ -71,6 +70,11 @@ class Administrador(Usuario):
         conn.commit()
         return render_template('/views/administrador_cargar_cliente_individuo.html')
 
+    def get_todas_cuentas(listar_todas_cuentas, conn):
+        listar_todas_cuentas.execute('select us.id, du.nombre, du.apellido, du.razon_social, tc.nombre, ca.numero_cuenta, ca.saldo from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta ca on ca.usuario_id = us.id join tipo_cuenta tc on ca.tipo_cuenta_id = tc.id where us.id = 1')
+        listado_todas_cuentas = listar_todas_cuentas.fetchall()
+        conn.commit()
+        return listado_todas_cuentas
 
     # def set_password():
     #     pass

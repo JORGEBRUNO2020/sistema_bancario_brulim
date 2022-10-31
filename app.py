@@ -187,6 +187,7 @@ def administrador_cargar_cliente_pyme():
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
+#Lanza página administrador_listar_saldos.html
 @app.route('/administrador_listar_saldos', methods=['GET'])
 def listar_todos_los_saldos():
     conn= mysql.connect()
@@ -195,14 +196,12 @@ def listar_todos_los_saldos():
     return render_template('/views/administrador_listar_saldos.html',listado_todos_saldos=listado_todos_saldos )
 
 #Lanza página administrador_listar_cuentas.html
-@app.route('/administrador_listar_cuentas')
+@app.route('/administrador_listar_cuentas', methods=['GET'])
 def administrador_listar_cuentas():
-    return render_template('/views/administrador_listar_cuentas.html')
-
-#Lanza página administrador_listar_saldos.html
-# @app.route('/administrador_listar_saldos')
-# def administrador_listar_saldos():
-#     return render_template('/views/administrador_listar_saldos.html')
+    conn= mysql.connect()
+    listar_todas_cuentas=conn.cursor()
+    listado_todas_cuentas= Administrador.get_todas_cuentas(listar_todas_cuentas, conn)
+    return render_template('/views/administrador_listar_cuentas.html', listado_todas_cuentas=listado_todas_cuentas)
 
 #Lanza página administrador_listar_usuarios.html
 @app.route('/administrador_listar_usuarios', methods=['GET'])
