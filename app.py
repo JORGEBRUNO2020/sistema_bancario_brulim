@@ -92,7 +92,7 @@ def listar_todas_las_cuentas():
     conn= mysql.connect()
     listar_todas_cuentas=conn.cursor()
     listado_todas_cuentas=Cuenta.get_todas_las_cuentas(listar_todas_cuentas, conn)
-    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas )
+    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas)
 
 
 #Lanza página listar_movimientos.html
@@ -150,24 +150,27 @@ def administrador():
 
 #Lanza página administrador_cargar_cliente_individuo.html
 @app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
-def administrador_cargar_cliente_individuo():   
-    if  request.method == 'POST':
-        _cuitcuil = request.form['cuit_cuil']
-        _dni = request.form['dni']
-        _nombre = request.form['nombre']
-        _apellido = request.form['apellido']
-        _telefono = request.form['telefono']
-        _email = request.form['email']
-        _nombre_usuario = request.form['usuario']
-        _password = request.form['password']
-        conn = mysql.connect()
-        cargar_individuo = conn.cursor()
-        Administrador.set_usuario(conn, cargar_individuo, 1)
-        Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
-        Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
-        return render_template('/views/administrador_cargar_cliente_individuo.html')
+def administrador_cargar_cliente_individuo():  
+    if Banco.validar_administrador(id_usuario_login): 
+        if  request.method == 'POST':
+            _cuitcuil = request.form['cuit_cuil']
+            _dni = request.form['dni']
+            _nombre = request.form['nombre']
+            _apellido = request.form['apellido']
+            _telefono = request.form['telefono']
+            _email = request.form['email']
+            _nombre_usuario = request.form['usuario']
+            _password = request.form['password']
+            conn = mysql.connect()
+            cargar_individuo = conn.cursor()
+            Administrador.set_usuario(conn, cargar_individuo, 1)
+            Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
+            Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
+            return render_template('/views/administrador_cargar_cliente_individuo.html')
+        else:
+            return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
-        return render_template('/views/administrador_cargar_cliente_individuo.html')
+        return render_template('/views/login.html')
     
 #Lanza página administrador_cargar_cliente_pyme.html
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])

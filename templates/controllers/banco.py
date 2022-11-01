@@ -25,4 +25,11 @@ class Banco():
             validacion = [0]
             return ('/views/login.html')
 
+    def validar_administrador(datos_login):
+        print(datos_login)
+        if (datos_login[1][0][4] != 'Administrador'):
+            return 1
+        else: 
+            return 0
+
 
