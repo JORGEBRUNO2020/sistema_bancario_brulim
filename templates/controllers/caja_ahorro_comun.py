@@ -1,3 +1,4 @@
+from flask import render_template
 from templates.controllers.cuentas import Cuenta
 
 class Caja_ahorro_comun(Cuenta):
@@ -54,4 +55,14 @@ class Caja_ahorro_comun(Cuenta):
             if int(item[0]) == int(id_cuenta):
                 store_resultados.append(item)
         return store_resultados
+
+    def set_crear_cuenta_caja_ahorro(cursor, conn, usuario):
+        ultimo = cursor.execute("SELECT max(numero_cuenta) FROM cuenta")
+        ultimo = cursor.fetchall()
+        print(ultimo[0][0])
+        ultimo = ultimo[0][0]
+
+        cursor.execute("insert into cuenta VALUES (%s,'205627869', 0, 1, 1, %s)",(ultimo+1,usuario))
+        conn.commit()
+        return render_template ('/views/listar_cuentas.html')
 

@@ -72,12 +72,16 @@ def login():
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
 
-#Lanza página crear_cuenta.html
-@app.route('/crear_cuenta', methods=['GET'])
-def crear_cuenta():
-    conn= mysql.connect()
 
-    return render_template('/views/crear_cuenta.html')
+#Lanza página crear_cuenta.html
+@app.route('/crear_cuenta_caja_ahorro', methods=['GET'])
+def crear_cuenta_caja_ahorro():
+    conn= mysql.connect()
+    caja_ahorro_com=conn.cursor()
+    Caja_ahorro_comun.set_crear_cuenta_caja_ahorro(caja_ahorro_com ,conn, id_usuario_login[0])
+
+    return render_template('/views/listar_cuentas.html')
+
 
 
 #Lanza página listar_cuentas.html
