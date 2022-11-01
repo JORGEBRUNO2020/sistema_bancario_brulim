@@ -151,7 +151,9 @@ def administrador():
 #Lanza página administrador_cargar_cliente_individuo.html
 @app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
 def administrador_cargar_cliente_individuo():  
-    if Banco.validar_administrador(id_usuario_login): 
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    if Banco.validar_administrador(cursor, conn,id_usuario_login): 
         if  request.method == 'POST':
             _cuitcuil = request.form['cuit_cuil']
             _dni = request.form['dni']
@@ -175,6 +177,7 @@ def administrador_cargar_cliente_individuo():
 #Lanza página administrador_cargar_cliente_pyme.html
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])
 def administrador_cargar_cliente_pyme():
+    print(id_usuario_login)
     if  request.method == 'POST':
         _cuitcuil = request.form['cuit_cuil']
         _razon_social = request.form['razon_social']

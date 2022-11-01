@@ -25,11 +25,22 @@ class Banco():
             validacion = [0]
             return ('/views/login.html')
 
-    def validar_administrador(datos_login):
-        print(datos_login)
-        if (datos_login[1][0][4] != 'Administrador'):
-            return 1
-        else: 
-            return 0
+    def validar_administrador(cursor, conn,id_usuario_login):
+        cursor.execute("select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo from login lg join usuario us on lg.usuario_id = us.id join tipo_usuario tu on tu.id = us.tipo_usuario_id where us.id=%s",(id_usuario_login))
+        datos_usuario=cursor.fetchall()
+        conn.commit()
+        print(datos_usuario[0][4])
+        if (datos_usuario[0][4]) != 'Administrador':
+            return ('/views/login.html')
+        else :
+            return ('/views/administrador_cargar_cliente_individuo.html')
+
+
+    # def validar_administrador(cursor, conn,datos_login):
+    #     print(datos_login)
+    #     if (datos_login[1][0][4] != 'Administrador'):
+    #         return 1
+    #     else: 
+    #         return 0
 
 
