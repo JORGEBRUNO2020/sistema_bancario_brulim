@@ -62,7 +62,7 @@ class Caja_ahorro_comun(Cuenta):
         print(ultimo[0][0])
         ultimo = ultimo[0][0]
 
-        cursor.execute("insert into cuenta VALUES (%s,'205627869', 0, 1, 1, %s)",(ultimo+1,usuario))
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 1, %s)",(usuario))
         conn.commit()
-        return render_template ('/views/listar_cuentas.html')
+        return render_template('/views/main_page.html')
 

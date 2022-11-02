@@ -80,7 +80,7 @@ def crear_cuenta_caja_ahorro():
     caja_ahorro_com=conn.cursor()
     Caja_ahorro_comun.set_crear_cuenta_caja_ahorro(caja_ahorro_com ,conn, id_usuario_login[0])
 
-    return render_template('/views/listar_cuentas.html')
+    return render_template('/views/crear_cuenta.html')
 
 
 
