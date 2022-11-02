@@ -1,3 +1,4 @@
+from flask import render_template
 from  templates.controllers.cuentas import Cuenta
 
 class Cuenta_corriente(Cuenta):
@@ -29,3 +30,8 @@ class Cuenta_corriente(Cuenta):
 
     def get_tipo():
         pass
+
+    def set_crear_cuenta_corriente_pesos(cursor, conn, usuario):
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 3, %s)",(usuario))
+        conn.commit()
+        return render_template('/views/main_page.html')

@@ -57,11 +57,6 @@ class Caja_ahorro_comun(Cuenta):
         return store_resultados
 
     def set_crear_cuenta_caja_ahorro(cursor, conn, usuario):
-        ultimo = cursor.execute("SELECT max(numero_cuenta) FROM cuenta")
-        ultimo = cursor.fetchall()
-        print(ultimo[0][0])
-        ultimo = ultimo[0][0]
-
         cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 1, %s)",(usuario))
         conn.commit()
         return render_template('/views/main_page.html')

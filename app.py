@@ -10,6 +10,7 @@ from templates.controllers.banco import *
 from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
 from templates.controllers.administrador import *
+from templates.controllers.cuenta_corriente import*
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -74,6 +75,11 @@ def login():
 
 
 #Lanza página crear_cuenta.html
+@app.route('/crear_cuenta', methods=['GET'])
+def crear_cuenta():
+    return render_template('/views/crear_cuenta.html')
+
+
 @app.route('/crear_cuenta_caja_ahorro', methods=['GET'])
 def crear_cuenta_caja_ahorro():
     conn= mysql.connect()
@@ -81,6 +87,16 @@ def crear_cuenta_caja_ahorro():
     Caja_ahorro_comun.set_crear_cuenta_caja_ahorro(caja_ahorro_com ,conn, id_usuario_login[0])
 
     return render_template('/views/crear_cuenta.html')
+
+@app.route('/crear_cuenta_corriente_pesos', methods=['GET'])
+def crear_cuenta_corriente_pesos():
+    conn= mysql.connect()
+    cuenta_corriente_pesos=conn.cursor()
+    Cuenta_corriente.set_crear_cuenta_corriente_pesos(cuenta_corriente_pesos ,conn, id_usuario_login[0])
+
+    return render_template('/views/crear_cuenta.html')
+
+
 
 
 
