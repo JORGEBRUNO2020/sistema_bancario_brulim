@@ -153,26 +153,30 @@ def administrador():
 def administrador_cargar_cliente_individuo():  
     conn= mysql.connect()
     cursor=conn.cursor()
-    if Banco.validar_administrador(cursor, conn,id_usuario_login): 
-        if  request.method == 'POST':
-            _cuitcuil = request.form['cuit_cuil']
-            _dni = request.form['dni']
-            _nombre = request.form['nombre']
-            _apellido = request.form['apellido']
-            _telefono = request.form['telefono']
-            _email = request.form['email']
-            _nombre_usuario = request.form['usuario']
-            _password = request.form['password']
-            conn = mysql.connect()
-            cargar_individuo = conn.cursor()
-            Administrador.set_usuario(conn, cargar_individuo, 1)
-            Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
-            Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
-            return render_template('/views/administrador_cargar_cliente_individuo.html')
-        else:
+    if  request.method == 'POST':
+        _cuitcuil = request.form['cuit_cuil']
+        _dni = request.form['dni']
+        _nombre = request.form['nombre']
+        _apellido = request.form['apellido']
+        _telefono = request.form['telefono']
+        _email = request.form['email']
+        _nombre_usuario = request.form['usuario']
+        _password = request.form['password']
+        try:
+            if Banco.validar_administrador(cursor, conn,id_usuario_login): 
+                conn = mysql.connect()
+                cargar_individuo = conn.cursor()
+                Administrador.set_usuario(conn, cargar_individuo, 1)
+                Administrador.set_datos_cliente_individuo(conn, cargar_individuo, _cuitcuil, _dni, _nombre, _apellido, _telefono, _email)
+                Administrador.set_login(conn, cargar_individuo, _nombre_usuario, _password)
+                return render_template('/views/administrador_cargar_cliente_individuo.html')
+            else:
+                return render_template('/views/login.html')
+        except Exception as e:
+            print("Exception Occured while code Execution: "+ str(e))
             return render_template('/views/administrador_cargar_cliente_individuo.html')
     else:
-        return render_template('/views/login.html')
+        return render_template('/views/administrador_cargar_cliente_individuo.html')
     
 #Lanza página administrador_cargar_cliente_pyme.html
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])
@@ -190,7 +194,6 @@ def administrador_cargar_cliente_pyme():
         Administrador.set_usuario(conn, cargar_pyme, 2)
         Administrador.set_datos_cliente_pyme(conn, cargar_pyme, _cuitcuil, _razon_social, _telefono, _email)
         Administrador.set_login(conn, cargar_pyme, _nombre_usuario, _password)
-
         return render_template('/views/administrador_cargar_cliente_pyme.html')
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')

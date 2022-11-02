@@ -31,9 +31,9 @@ class Banco():
         conn.commit()
         print(datos_usuario[0][4])
         if (datos_usuario[0][4]) != 'Administrador':
-            return ('/views/login.html')
+            return False
         else :
-            return ('/views/administrador_cargar_cliente_individuo.html')
+            return True
 
 
     # def validar_administrador(cursor, conn,datos_login):
