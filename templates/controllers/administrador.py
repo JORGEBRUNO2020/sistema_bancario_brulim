@@ -57,7 +57,7 @@ class Administrador(Usuario):
 
         ultimo = cargar_individuo.execute("SELECT max(id) FROM usuario")
         ultimo = cargar_individuo.fetchall() 
-        query = "INSERT INTO  login values ( %s,%s, %s)"
+        query = "INSERT INTO  login (nombre_usuario, password, usuario_id) values ( %s,%s, %s)"
         datos = (nombre_usuario, password, ultimo[0][0]) 
         cargar_individuo.execute(query, datos) 
         conn.commit()
