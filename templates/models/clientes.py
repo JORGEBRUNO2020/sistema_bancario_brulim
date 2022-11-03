@@ -1,4 +1,4 @@
-from  templates.controllers.usuarios import Usuario
+from  templates.models.usuarios import Usuario
 
 class Cliente(Usuario):
 

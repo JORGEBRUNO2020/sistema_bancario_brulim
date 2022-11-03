@@ -1,5 +1,5 @@
 from flask import render_template
-from templates.controllers.cuentas import Cuenta
+from templates.models.cuentas import Cuenta
 
 class Caja_ahorro_comun(Cuenta):
 

@@ -1,4 +1,4 @@
-from  templates.controllers.clientes import Usuario, Cliente
+from  templates.models.clientes import Usuario, Cliente
 
 
 

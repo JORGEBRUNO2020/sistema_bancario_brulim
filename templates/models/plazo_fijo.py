@@ -1,4 +1,4 @@
-from  templates.controllers.individuo import Individuos 
+from  templates.models.individuo import Individuos 
 
 class Plazo_fijo():
 

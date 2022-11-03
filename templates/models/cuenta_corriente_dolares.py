@@ -1,12 +1,12 @@
-from  templates.controllers.cuentas import Cuenta
-from  templates.controllers.cuenta_corriente import Cuenta_corriente
+from  templates.models.cuentas import Cuenta
+from  templates.models.cuenta_corriente import Cuenta_corriente
 
 class Cuenta_corriente_sr(Cuenta_corriente ,Cuenta):
 
-    def __init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo, tipo, saldo_retenido):
+    def __init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo, tipo, moneda):
         Cuenta.__init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo)
         Cuenta_corriente.__init__(self, tipo)
-        self.__saldo_retenido = saldo_retenido
+        self.__moneda = moneda
 
     def get_titular():
         pass
@@ -32,5 +32,5 @@ class Cuenta_corriente_sr(Cuenta_corriente ,Cuenta):
     def get_tipo():
         pass
 
-    def get_saldo_retenido():
+    def get_moneda():
         pass

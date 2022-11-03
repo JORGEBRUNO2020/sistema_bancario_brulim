@@ -5,12 +5,12 @@ from flaskext.mysql import MySQL
 from datetime import datetime
 from flask import send_from_directory
 import os
-from templates.controllers.usuarios import *
-from templates.controllers.banco import *
-from templates.controllers.caja_ahorro_comun import *
-from templates.controllers.cuentas import *
-from templates.controllers.administrador import *
-from templates.controllers.cuenta_corriente import*
+from templates.models.usuarios import *
+from templates.models.banco import *
+from templates.models.caja_ahorro_comun import *
+from templates.models.cuentas import *
+from templates.models.administrador import *
+from templates.models.cuenta_corriente import*
 
 
 app= Flask(__name__, static_url_path='/static')
