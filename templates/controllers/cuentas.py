@@ -18,11 +18,11 @@ class Cuenta():
         conn.commit()
         return listado_cuentas
 
-    def get_todas_las_cuentas(listar_cuentas, conn): 
-        listar_cuentas.execute('select us.id, du.nombre, du.apellido, du.razon_social, ca.numero_cuenta, ca.saldo from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta ca where us.id=ca.usuario_id order by us.id asc') # on ca.usuario_id = us.id where us.id = 1
-        listado_todas_cuentas=listar_cuentas.fetchall()
+    def get_todos_los_saldos(listar_saldos, conn): 
+        listar_saldos.execute('select us.id, du.nombre, du.apellido, du.razon_social, ca.numero_cuenta, ca.saldo from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta ca where us.id=ca.usuario_id order by us.id asc') 
+        listado_todos_saldos=listar_saldos.fetchall()
         conn.commit()
-        return listado_todas_cuentas
+        return listado_todos_saldos
 
     
     def get_saldo():

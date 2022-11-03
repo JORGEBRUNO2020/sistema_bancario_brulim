@@ -1,10 +1,71 @@
+<style>
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right;   
+    }
+</style>
 <div class="page-container">
-{% include '/views/header.html' %}
-
+    
+    {% include '/views/header.html' %} 
     <div class="content">
+        <div>
+            <h1 style="text-align: center">Crear una cuenta</h1>
+            <h2 style="text-align: center">Escoja un tipo de cuenta</h2>
+            <br>
+        </div>
+        <body>
+            <a class="nav-link" href='/crear_cuenta_caja_ahorro'>Caja Ahorro Común<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href='/crear_cuenta_corriente_pesos'>Cuenta Corriente Pesos<span class="sr-only">(current)</span></a>
+            
 
+            <form enctype="multipart/form-data" action='/crear_cuenta_caja_ahorro' method="post"></form>
+            <input type="submit" value="Caja Ahorro Común">
+            <form enctype="multipart/form-data" action='/crear_cuenta' method="post"></form>
+            <input type="submit" value="Caja Ahorro Saldo Retenido">
+            <form enctype="multipart/form-data" action='/crear_cuenta' method="post"></form>
+            <input type="submit" value="Cuenta Corriente Pesos">
+            <form enctype="multipart/form-data" action='/crear_cuenta' method="post"></form>
+            <input type="submit" value="Cuenta Corriente Dólares">
+            <form enctype="multipart/form-data" action='/crear_cuenta' method="post"></form>
+            <input type="submit" value="Caja Ahorro Común">
+
+
+            <!-- <select name="Cuenta tipo: " action="/crear_cuenta" method="post"><br><br>
+                <label for="Cuenta">Escoja el tipo de cuenta que desea abrir </label><br>
+                <input type="radio" name="ingresos" value="Caja Ahorro Común"> Caja Ahorro Común<br>
+                <input type="radio" name="ingresos" value="Caja Ahorro Saldo Retenido"> Caja Ahorro Saldo Retenido<br>
+                <input type="radio" name="ingresos" value="Cuenta Corriente Pesos"> Cuenta Corriente Pesos<br>
+                <input type="radio" name="ingresos" value="Cuenta Corriente Dólares"> Cuenta Corriente Dólares<br>
+                <input type="radio" name="ingresos" value="Cuenta Corriente Saldo Retenido"> Cuenta Corriente Saldo Retenido<br>
+                <p><input type="submit" value="Abrir cuenta"></p>
+            </select> -->
+
+<!-- 
+
+            <label for="Cuenta">Escoja el tipo de cuenta que desea abrir </label>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Caja Ahorro Común</button>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Caja Ahorro Saldo Retenido</button>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Cuenta Corriente Pesos</button>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Cuenta Corriente Dólares</button>
+            <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Cuenta Corriente Saldo Retenido</button> -->
+
+            <!-- <select name="Cuenta tipo: " action="/crear_cuenta" method="post">
+                <option value="Caja_ahorro_comun">Caja de Ahorro Común</option>
+                <option value="Caja_ahorro_sr">Caja de Ahorro con Saldo Retenido</option>
+                <option value="Cuenta_corriente">Cuenta Corriente</option>
+                <option value="Cuenta_corriente_sr">Cuenta Corriente con Saldo Retenido</option>
+            </select> -->
+            <!-- <button class="btn btn-lg btn-secondary btn-block form-control" type="submit">Aceptar</button> -->
+            
+        </body>
+       
     </div>
-
-
-{% include '/views/footer.html' %}
+    {% include '/views/footer.html' %}
 </div>

@@ -1,3 +1,4 @@
+from flask import render_template
 from templates.controllers.cuentas import Cuenta
 
 class Caja_ahorro_comun(Cuenta):
@@ -54,4 +55,9 @@ class Caja_ahorro_comun(Cuenta):
             if int(item[0]) == int(id_cuenta):
                 store_resultados.append(item)
         return store_resultados
+
+    def set_crear_cuenta_caja_ahorro(cursor, conn, usuario):
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 1, %s)",(usuario))
+        conn.commit()
+        return render_template('/views/main_page.html')
 

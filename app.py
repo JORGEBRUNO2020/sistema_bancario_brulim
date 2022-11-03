@@ -10,6 +10,7 @@ from templates.controllers.banco import *
 from templates.controllers.caja_ahorro_comun import *
 from templates.controllers.cuentas import *
 from templates.controllers.administrador import *
+from templates.controllers.cuenta_corriente import*
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -73,10 +74,31 @@ def login():
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
 
+
 #Lanza página crear_cuenta.html
-@app.route('/crear_cuenta')
+@app.route('/crear_cuenta', methods=['GET'])
 def crear_cuenta():
     return render_template('/views/crear_cuenta.html')
+
+
+@app.route('/crear_cuenta_caja_ahorro', methods=['GET'])
+def crear_cuenta_caja_ahorro():
+    conn= mysql.connect()
+    caja_ahorro_com=conn.cursor()
+    Caja_ahorro_comun.set_crear_cuenta_caja_ahorro(caja_ahorro_com ,conn, id_usuario_login[0])
+
+    return render_template('/views/crear_cuenta.html')
+
+@app.route('/crear_cuenta_corriente_pesos', methods=['GET'])
+def crear_cuenta_corriente_pesos():
+    conn= mysql.connect()
+    cuenta_corriente_pesos=conn.cursor()
+    Cuenta_corriente.set_crear_cuenta_corriente_pesos(cuenta_corriente_pesos ,conn, id_usuario_login[0])
+
+    return render_template('/views/crear_cuenta.html')
+
+
+
 
 
 #Lanza página listar_cuentas.html
@@ -87,12 +109,7 @@ def listar_cuentas():
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
-@app.route('/administrador_listar_cuentas', methods=['GET'])
-def listar_todas_las_cuentas():
-    conn= mysql.connect()
-    listar_todas_cuentas=conn.cursor()
-    listado_todas_cuentas=Cuenta.get_todas_las_cuentas(listar_todas_cuentas, conn)
-    return render_template('/views/administrador_listar_cuentas.html',listado_todas_cuentas=listado_todas_cuentas)
+
 
 
 #Lanza página listar_movimientos.html
@@ -198,17 +215,29 @@ def administrador_cargar_cliente_pyme():
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
-    
+#Lanza página administrador_listar_saldos.html
+@app.route('/administrador_listar_saldos', methods=['GET'])
+def listar_todos_los_saldos():
+    conn= mysql.connect()
+    listar_todos_saldos=conn.cursor()
+    listado_todos_saldos=Cuenta.get_todos_los_saldos(listar_todos_saldos, conn)
+    return render_template('/views/administrador_listar_saldos.html',listado_todos_saldos=listado_todos_saldos )
 
 #Lanza página administrador_listar_cuentas.html
-@app.route('/administrador_listar_cuentas')
+@app.route('/administrador_listar_cuentas', methods=['GET'])
 def administrador_listar_cuentas():
-    return render_template('/views/administrador_listar_cuentas.html')
+    conn= mysql.connect()
+    listar_todas_cuentas=conn.cursor()
+    listado_todas_cuentas= Administrador.get_todas_cuentas(listar_todas_cuentas, conn)
+    return render_template('/views/administrador_listar_cuentas.html', listado_todas_cuentas=listado_todas_cuentas)
 
-#Lanza página administrador_listar_saldos.html
-@app.route('/administrador_listar_saldos')
-def administrador_listar_saldos():
-    return render_template('/views/administrador_listar_saldos.html')
+#Lanza página administrador_listar_usuarios.html
+@app.route('/administrador_listar_usuarios', methods=['GET'])
+def administrador_listar_usuarios():
+    conn= mysql.connect()
+    listar_usuarios=conn.cursor()
+    listado_usuarios=Usuario.get_usuarios(listar_usuarios, conn)
+    return render_template('/views/administrador_listar_usuarios.html', listado_usuarios = listado_usuarios)
 
 #Lanza página administrador_listar_movimientos.html
 @app.route('/administrador_listar_movimientos')
