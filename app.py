@@ -11,6 +11,8 @@ from templates.models.caja_ahorro_comun import *
 from templates.models.cuentas import *
 from templates.models.administrador import *
 from templates.models.cuenta_corriente import*
+from test_funcional import *
+
 
 
 app= Flask(__name__, static_url_path='/static')
@@ -33,9 +35,9 @@ app.config['carpeta_imagenes'] = carpeta_imagenes
 
 
 def valor_variable(id):
+    Test.id_logeado(id_usuario_login, id)
     id_usuario_login.append(id)
     return id_usuario_login[0]
-    
 
 @app.route('/carpeta_imagenes/<nombre_imagen>')
 def get_imagen(nombre_imagen):
@@ -60,7 +62,6 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    print(valido)
     try:
         if valido[0] == 1 and valido[1][0][4] != 'Administrador':
             valor_variable(valido[1][0][2])
@@ -73,7 +74,6 @@ def login():
     except Exception as e:
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
-
 
 #Lanza página crear_cuenta.html
 @app.route('/crear_cuenta', methods=['GET'])
@@ -97,10 +97,6 @@ def crear_cuenta_corriente_pesos():
 
     return render_template('/views/crear_cuenta.html')
 
-
-
-
-
 #Lanza página listar_cuentas.html
 @app.route('/listar_cuentas', methods=['GET'])
 def listar_cuentas():
@@ -108,9 +104,6 @@ def listar_cuentas():
     listar_cuentas=conn.cursor()
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
-
-
-
 
 #Lanza página listar_movimientos.html
 @app.route('/listar_movimientos', methods=['POST','GET'])
@@ -136,18 +129,15 @@ def listar_saldos():
     cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
-
 #Lanza página realizar_deposito.html
 @app.route('/realizar_deposito')
 def realizar_deposito():
     return render_template('/views/realizar_deposito.html')
 
-
 #Lanza página realizar_transferencial.html
 @app.route('/realizar_transferencia')
 def realizar_transferencia():
     return render_template('/views/realizar_transferencia.html')
-
 
 #Lanza página realizar_retiro.html
 @app.route('/realizar_retiro')
@@ -166,7 +156,7 @@ def administrador():
     return render_template('/views/administrador_main.html')
 
 #Lanza página administrador_cargar_cliente_individuo.html
-@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
+@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST']) 
 def administrador_cargar_cliente_individuo():  
     conn= mysql.connect()
     cursor=conn.cursor()
@@ -258,6 +248,7 @@ def administrador_ver_comisiones():
 @app.route('/login')
 def administrador_salir():
     return render_template('views/login.html')
+
 
 #Execute APP
 if __name__== '__main__':
