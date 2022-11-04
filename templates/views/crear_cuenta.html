@@ -16,16 +16,18 @@
     {% include '/views/header.html' %} 
     <div class="content">
         <div>
-            <h1 style="text-align: center">Crear una cuenta</h1>
-            <h2 style="text-align: center">Escoja un tipo de cuenta</h2>
+            <h1 style="text-align: center">Crear Cuenta</h1>
+            <h2 style="text-align: center">Escoja Tipo de Cuenta</h2>
+            <br>
+            <br>
             <br>
         </div>
         <body>
 
-            <form method="get" action='/crear_cuenta_caja_ahorro'>
-            <input type="submit" value="Caja Ahorro común" />
+            <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/crear_cuenta_caja_ahorro'>
+            <input type="submit" value="Caja Ahorro Pesos" />
             </form>
-            <form method="get" action='/crear_cuenta_corriente_pesos'>
+            <form class="titulos h3 mb-3 font-weight-bolder" method="get" action='/crear_cuenta_corriente_pesos'>
             <input type="submit" value="Cuenta Corriente Pesos" />
             </form>
            

@@ -101,3 +101,418 @@ VALUES(310, '2022-01-11', 1, 3, 1);
             21: ["Cotización Dólar",rd.randint(240,300)],
             22: ["Valor Bonos",rd.randint(1000,5000)],
             23: ["Variación Bonos",rd.randint(2,5)]
+
+
+**************************************************************************************************************
+*****************************Dbeaver Consultas****************************************************************
+**************************************************************************************************************
+-- Created by Vertabelo (http://vertabelo.com)
+-- Last modification date: 2022-09-23 23:48:11.741
+
+-- tables
+-- Table: cuenta
+CREATE TABLE cuenta (
+    numero_cuenta int NOT NULL AUTO_INCREMENT,
+    cbu varchar(10) NOT NULL,
+    saldo decimal(14,2) NOT NULL,
+    sucursal_id int NOT NULL,
+    tipo_cuenta_id int NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT cuenta_pk PRIMARY KEY (numero_cuenta)
+);
+
+-- Table: datos_cuenta
+CREATE TABLE datos_cuenta (
+    cuenta_numero_cuenta int NOT NULL,
+    fecha_apertura date NOT NULL,
+    estado boolean NOT NULL,
+    CONSTRAINT datos_cuenta_pk PRIMARY KEY (cuenta_numero_cuenta)
+);
+
+-- Table: datos_usuario
+CREATE TABLE datos_usuario (
+    cuil_cuit int NOT NULL,
+    dni varchar(8) NULL,
+    nombre varchar(45) NULL,
+    apellido varchar(40) NULL,
+    razon_social varchar(45) NULL,
+    telefono varchar(20) NOT NULL,
+    email varchar(60) NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT datos_usuario_pk PRIMARY KEY (cuil_cuit)
+);
+
+-- Table: login
+CREATE TABLE login (
+    nombre_usuario varchar(40) NOT NULL,
+    password varchar(25) NOT NULL,
+    usuario_id int NOT NULL,
+    CONSTRAINT login_pk PRIMARY KEY (nombre_usuario)
+);
+
+-- Table: moneda
+CREATE TABLE moneda (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(25) NOT NULL,
+    pais varchar(15) NOT NULL,
+    precio_compra decimal(10,2) NOT NULL,
+    precio_venta decimal(10,2) NOT NULL,
+    CONSTRAINT moneda_pk PRIMARY KEY (id)
+);
+
+-- Table: movimiento_comision
+CREATE TABLE movimiento_comision (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre_comision varchar(40) NOT NULL,
+    costo_comision decimal(6,2) NOT NULL,
+    CONSTRAINT movimiento_comision_pk PRIMARY KEY (id)
+);
+
+-- Table: sucursal
+CREATE TABLE sucursal (
+    id int NOT NULL AUTO_INCREMENT,
+    ciudad varchar(30) NOT NULL,
+    direccion varchar(45) NOT NULL,
+    CONSTRAINT sucursal_pk PRIMARY KEY (id)
+);
+
+-- Table: tipo_cuenta
+CREATE TABLE tipo_cuenta (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(30) NOT NULL,
+    CONSTRAINT tipo_cuenta_pk PRIMARY KEY (id)
+);
+
+-- Table: tipo_usuario
+CREATE TABLE tipo_usuario (
+    id int NOT NULL AUTO_INCREMENT,
+    usuario_tipo varchar(30) NOT NULL,
+    CONSTRAINT tipo_usuario_pk PRIMARY KEY (id)
+);
+
+-- Table: transaccion
+CREATE TABLE transaccion (
+    id int NOT NULL AUTO_INCREMENT,
+    monto float(14,2) NOT NULL,
+    fecha_movimiento date NOT NULL,
+    cuenta_numero_cuenta int NOT NULL,
+    comision_id int NOT NULL,
+    moneda_id int NOT NULL,
+    CONSTRAINT transaccion_pk PRIMARY KEY (id)
+);
+
+-- Table: usuario
+CREATE TABLE usuario (
+    id int NOT NULL AUTO_INCREMENT,
+    estado boolean NOT NULL,
+    tipo_usuario_id int NOT NULL,
+    CONSTRAINT usuario_pk PRIMARY KEY (id)
+);
+
+-- foreign keys
+-- Reference: cliente_tipo_usuario (table: usuario)
+ALTER TABLE usuario ADD CONSTRAINT cliente_tipo_usuario FOREIGN KEY cliente_tipo_usuario (tipo_usuario_id)
+    REFERENCES tipo_usuario (id);
+
+-- Reference: cuenta_sucursal (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_sucursal FOREIGN KEY cuenta_sucursal (sucursal_id)
+    REFERENCES sucursal (id);
+
+-- Reference: cuenta_tipo_cuenta (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_tipo_cuenta FOREIGN KEY cuenta_tipo_cuenta (tipo_cuenta_id)
+    REFERENCES tipo_cuenta (id);
+
+-- Reference: cuenta_usuario (table: cuenta)
+ALTER TABLE cuenta ADD CONSTRAINT cuenta_usuario FOREIGN KEY cuenta_usuario (usuario_id)
+    REFERENCES usuario (id);
+
+-- Reference: datos_cuenta_cuenta (table: datos_cuenta)
+ALTER TABLE datos_cuenta ADD CONSTRAINT datos_cuenta_cuenta FOREIGN KEY datos_cuenta_cuenta (cuenta_numero_cuenta)
+    REFERENCES cuenta (numero_cuenta);
+
+-- Reference: datos_usuario_usuario (table: datos_usuario)
+ALTER TABLE datos_usuario ADD CONSTRAINT datos_usuario_usuario FOREIGN KEY datos_usuario_usuario (usuario_id)
+    REFERENCES usuario (id);
+
+-- Reference: login_usuario (table: login)
+ALTER TABLE login ADD CONSTRAINT login_usuario FOREIGN KEY login_usuario (usuario_id)
+    REFERENCES usuario (id);
+
+-- Reference: movimiento_comision (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT movimiento_comision FOREIGN KEY movimiento_comision (comision_id)
+    REFERENCES movimiento_comision (id);
+
+-- Reference: movimiento_cuenta (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT movimiento_cuenta FOREIGN KEY movimiento_cuenta (cuenta_numero_cuenta)
+    REFERENCES cuenta (numero_cuenta);
+
+-- Reference: transaccion_moneda (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT transaccion_moneda FOREIGN KEY transaccion_moneda (moneda_id)
+    REFERENCES moneda (id);
+
+-- End of file.
+
+
+   
+insert into sucursal (ciudad, direccion) values ('Tandil', 'Avellaneda 1233')
+
+select * from sucursal
+
+ALTER TABLE tipo_usuario AUTO_INCREMENT = 1;
+
+insert into tipo_usuario (usuario_tipo) values ('Pyme')
+insert into tipo_usuario (usuario_tipo) values ('Individuo')
+insert into tipo_usuario (usuario_tipo) values ('Administrador')
+
+select * from sistema_bancario.tipo_usuario 
+
+insert into usuario (estado, tipo_usuario_id) values (true,1 )
+select * from sistema_bancario.usuario 
+
+insert into login (nombre_usuario, password, usuario_id) values ('mlimideiro', 'MarceLimi', 1)
+insert into login (nombre_usuario, password, usuario_id) values ('jfur', '123456', 2)
+insert into login (nombre_usuario, password, usuario_id) values ('jbruno', '111111', 3)
+insert into login (nombre_usuario, password, usuario_id) values ('mariomars', '1212', 4)
+
+
+select * from sistema_bancario.login  
+
+
+
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Caja Ahorro');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Caja Ahorro SR');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente SR');
+INSERT INTO sistema_bancario.tipo_cuenta (nombre) VALUES('Cuenta Corriente Dólares');
+
+select * from sistema_bancario.tipo_cuenta 
+
+INSERT INTO sistema_bancario.cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) 
+	VALUES('2326353521', 500, 1, 1, 1);
+INSERT INTO sistema_bancario.cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) 
+	VALUES('205623369', 6500, 1, 3, 1);
+
+
+insert into usuario (estado, tipo_usuario_id) values (true,3 )
+
+
+select * from usuario
+
+INSERT INTO sistema_bancario.datos_usuario
+(cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
+VALUES(215699451, '21569945', 'Jorge', 'Bruno', NULL, '2494658944', 'georgie@gmail.com', 3);
+
+INSERT INTO sistema_bancario.datos_cuenta (cuenta_numero_cuenta, fecha_apertura, estado) VALUES(1, '2022-10-10', 1);
+INSERT INTO sistema_bancario.datos_cuenta (cuenta_numero_cuenta, fecha_apertura, estado) VALUES(2, '2022-06-08', 1);
+
+SELECT * FROM usuario us 
+	JOIN login lg 
+	ON us.id = lg.usuario_id  
+	JOIN datos_usuario du 
+	ON us.id = du.usuario_id 
+	join tipo_usuario tu 
+	on tu.id = us.tipo_usuario_id 
+	WHERE us.id = 1
+
+	select * from usuario us
+		join datos_usuario du 
+		on us.id = du.usuario_id 
+		join cuenta cu 
+		on us.id = cu.usuario_id 
+		join tipo_cuenta tc 
+		on tc.id = cu.tipo_cuenta_id 
+		join sucursal sc 
+		on sc.id = cu.sucursal_id 
+		where us.id = 1
+		order by cu.numero_cuenta asc 
+	
+	select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad  from usuario us
+		join cuenta cu 
+		on us.id = cu.usuario_id 
+		join tipo_cuenta tc 
+		on tc.id = cu.tipo_cuenta_id 
+		join sucursal sc 
+		on sc.id = cu.sucursal_id 
+		join datos_cuenta dc 
+		on cu.numero_cuenta = dc.cuenta_numero_cuenta
+		where us.id = 1
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo  from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on tu.id = us.id 
+where lg.nombre_usuario='mlimideiro'
+
+select * from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id where us.id =1
+
+
+select * from usuario us join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id join sucursal sc on sc.id = cu.sucursal_id join datos_cuenta dc on cu.numero_cuenta = dc.cuenta_numero_cuenta where us.id =1
+
+insert into sistema_bancario.datos_usuario values (23000000, "22671505", "Pepe", "Argento", "555464646", "pepe@gmail.com", 2)
+
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Mantenimiento Caja Ahorro', 200);
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Mantenimiento Caja Ahorro SR', 0);
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Transferencia Caja Ahorro', 60);
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Transferencia Caja Ahorro SR', 0);
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Depósito Caja Ahorro', 400);
+INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
+VALUES('Depósito Caja Ahorro SR', 0);
+
+select * from movimiento_comision mc 
+
+INSERT INTO sistema_bancario.moneda (nombre, pais, precio_compra, precio_venta)
+VALUES('Peso', 'Argentina', 1, 1);
+INSERT INTO sistema_bancario.moneda (nombre, pais, precio_compra, precio_venta)
+VALUES('Dólar', 'Estados Unidos', 297, 272);
+
+
+INSERT INTO sistema_bancario.transaccion
+(monto, fecha_movimiento, cuenta_numero_cuenta, comision_id, moneda_id)
+VALUES(420, '2022-01-01', 1, 3, 1);
+INSERT INTO sistema_bancario.transaccion
+(monto, fecha_movimiento, cuenta_numero_cuenta, comision_id, moneda_id)
+VALUES(310, '2022-01-11', 1, 3, 1);
+
+select * from transaccion t 
+select * from movimiento_comision mc 
+
+
+	
+-- Reference: transaccion_movimiento_comision (table: transaccion)
+ALTER TABLE transaccion ADD CONSTRAINT transaccion_movimiento_comision FOREIGN KEY transaccion_movimiento_comision (movimiento_comision_id)
+    REFERENCES movimiento_comision (id);	
+
+	
+alter table transaccion add movimiento_comision_id int(11)
+
+
+select ca.numero_cuenta, ca.tipo_cuenta_id, ts.id, ts.monto, ts.fecha_movimiento, mc.nombre_comision, mc.costo_comision, mo.nombre, mo.precio_compra, mo.precio_venta  
+	from transaccion ts 
+	join cuenta ca 
+	on ts.cuenta_numero_cuenta = ca.numero_cuenta 
+	join movimiento_comision mc 
+	on mc.id = ts.movimiento_comision_id 
+	join moneda mo 
+	on mo.id = ts.moneda_id 
+	where ts.cuenta_numero_cuenta  = 1
+	
+alter table transaccion drop column comision_id 
+
+insert into sistema_bancario.datos_usuario
+(cuil_cuit, dni, nombre, apellido, razon_social, telefono, email, usuario_id)
+values (21000000, '21671505', 'Pepe', 'Argento', NULL,'555464646', 'pepe@gmail.com', 2)
+
+INSERT INTO sistema_bancario.login
+(nombre_usuario, password, usuario_id)
+VALUES('us3', 'pass3', 2);
+
+select us.id, du.nombre, du.apellido, du.razon_social, tc.nombre, ca.numero_cuenta, ca.saldo
+	from usuario us
+	join datos_usuario du 
+	on us.id = du.usuario_id 
+	join cuenta ca 
+	on ca.usuario_id = us.id 
+	join tipo_cuenta tc 
+	on ca.tipo_cuenta_id = tc.id 
+	where us.id = 1
+
+select us.id, du.nombre, du.apellido, du.razon_social, tu.usuario_tipo 
+	from usuario us
+	join datos_usuario du 
+	on us.id = du.usuario_id 
+	join tipo_usuario tu 
+	on us.tipo_usuario_id = tu.id 
+	where us.id = 1
+
+	select us.id, du.nombre, du.apellido, du.razon_social, ca.numero_cuenta, ca.saldo
+from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta ca where us.id=ca.usuario_id 
+
+select * from usuario u 
+
+INSERT INTO sistema_bancario.cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES('1212121212', 1000, 1, 3, 5);
+
+select * from login
+select * from usuario
+select * from tipo_usuario
+select * from datos_usuario du 
+cmejia
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo  
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on cast(tu.id as int) = cast(us.id as int)
+where lg.nombre_usuario='cmejia'
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on us.tipo_usuario_id = tu.id 
+where lg.nombre_usuario='zzz'
+
+select *  
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on cast(tu.id as int) = cast(us.id as int)
+where lg.nombre_usuario='mlimideiro'
+
+join tipo_usuario tu on tu.id = us.id
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo  
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on tu.id = us.tipo_usuario_id  where lg.nombre_usuario='zzz'
+
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo 
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on tu.id = us.tipo_usuario_id  
+where us.id=3
+
+
+select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad 
+	from usuario us 
+    join cuenta cu 
+    on us.id = cu.usuario_id 
+    join tipo_cuenta tc 
+    on tc.id = cu.tipo_cuenta_id 
+    join sucursal sc 
+    on sc.id = cu.sucursal_id 
+    join datos_cuenta dc 
+    on cu.numero_cuenta = dc.cuenta_numero_cuenta 
+    where us.id =1 
+    order by cu.numero_cuenta asc
+    
+select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad  
+from usuario us join cuenta cu on us.id = cu.usuario_id 
+join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id 
+join sucursal sc on sc.id = cu.sucursal_id 
+join datos_cuenta dc on cu.numero_cuenta = dc.cuenta_numero_cuenta 
+where us.id = 1 order by cu.numero_cuenta asc
+
+select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo 
+from login lg 
+join usuario us on lg.usuario_id = us.id 
+join tipo_usuario tu on tu.id = us.tipo_usuario_id  
+
+
+select * from cuenta c 
+
+select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad  from usuario us 
+join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id 
+join sucursal sc on sc.id = cu.sucursal_id 
+join datos_cuenta dc on cu.numero_cuenta = dc.cuenta_numero_cuenta where us.id = 
+
+
+select us.id, du.nombre, du.apellido, du.razon_social, tc.nombre, ca.numero_cuenta, ca.saldo 
+from usuario us 
+join datos_usuario du on us.id = du.usuario_id 
+join cuenta ca on ca.usuario_id = us.id 
+join tipo_cuenta tc on ca.tipo_cuenta_id = tc.id  
+order by ca.numero_cuenta asc
+
+
