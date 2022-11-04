@@ -24,7 +24,6 @@ class Cuenta():
         conn.commit()
         return listado_todos_saldos
 
-    
     def get_saldo():
         pass
         

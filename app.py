@@ -11,9 +11,12 @@ from templates.models.caja_ahorro_comun import *
 from templates.models.cuentas import *
 from templates.models.administrador import *
 from templates.models.cuenta_corriente import*
+from app_administrador import app_administrador
+from database import mysql
 
 
 app= Flask(__name__, static_url_path='/static')
+app.register_blueprint(app_administrador, url_prefix="")
 
 global id_usuario_login
 id_usuario_login = []
@@ -21,7 +24,6 @@ id_usuario_login = []
 
 
 #Conexión con base de datos
-mysql= MySQL()
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
 app.config['MYSQL_DATABASE_PASSWORD']=''
@@ -60,7 +62,6 @@ def login():
     conn= mysql.connect()
     cursor=conn.cursor()
     valido = Banco.validar_login(cursor, conn, _usuario, _password)
-    print(valido)
     try:
         if valido[0] == 1 and valido[1][0][4] != 'Administrador':
             valor_variable(valido[1][0][2])
@@ -74,12 +75,10 @@ def login():
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/login.html')
 
-
 #Lanza página crear_cuenta.html
 @app.route('/crear_cuenta', methods=['GET'])
 def crear_cuenta():
     return render_template('/views/crear_cuenta.html')
-
 
 @app.route('/crear_cuenta_caja_ahorro', methods=['GET'])
 def crear_cuenta_caja_ahorro():
@@ -97,10 +96,6 @@ def crear_cuenta_corriente_pesos():
 
     return render_template('/views/crear_cuenta.html')
 
-
-
-
-
 #Lanza página listar_cuentas.html
 @app.route('/listar_cuentas', methods=['GET'])
 def listar_cuentas():
@@ -108,9 +103,6 @@ def listar_cuentas():
     listar_cuentas=conn.cursor()
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
-
-
-
 
 #Lanza página listar_movimientos.html
 @app.route('/listar_movimientos', methods=['POST','GET'])
@@ -136,18 +128,15 @@ def listar_saldos():
     cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
-
 #Lanza página realizar_deposito.html
 @app.route('/realizar_deposito')
 def realizar_deposito():
     return render_template('/views/realizar_deposito.html')
 
-
 #Lanza página realizar_transferencial.html
 @app.route('/realizar_transferencia')
 def realizar_transferencia():
     return render_template('/views/realizar_transferencia.html')
-
 
 #Lanza página realizar_retiro.html
 @app.route('/realizar_retiro')
@@ -158,12 +147,6 @@ def realizar_retiro():
 @app.route('/cerrar_cuenta')
 def cerrar_cuenta():
     return render_template('/views/cerrar_cuenta.html')
-
-# Routeos del administrador
-#Lanza página administrador_main.html
-@app.route('/administrador_header')
-def administrador():
-    return render_template('/views/administrador_main.html')
 
 #Lanza página administrador_cargar_cliente_individuo.html
 @app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
@@ -198,7 +181,6 @@ def administrador_cargar_cliente_individuo():
 #Lanza página administrador_cargar_cliente_pyme.html
 @app.route('/administrador_cargar_cliente_pyme', methods =['GET','POST'])
 def administrador_cargar_cliente_pyme():
-    print(id_usuario_login)
     if  request.method == 'POST':
         _cuitcuil = request.form['cuit_cuil']
         _razon_social = request.form['razon_social']
@@ -215,49 +197,7 @@ def administrador_cargar_cliente_pyme():
     else:
         return render_template('/views/administrador_cargar_cliente_pyme.html')
 
-#Lanza página administrador_listar_saldos.html
-@app.route('/administrador_listar_saldos', methods=['GET'])
-def listar_todos_los_saldos():
-    conn= mysql.connect()
-    listar_todos_saldos=conn.cursor()
-    listado_todos_saldos=Cuenta.get_todos_los_saldos(listar_todos_saldos, conn)
-    return render_template('/views/administrador_listar_saldos.html',listado_todos_saldos=listado_todos_saldos )
 
-#Lanza página administrador_listar_cuentas.html
-@app.route('/administrador_listar_cuentas', methods=['GET'])
-def administrador_listar_cuentas():
-    conn= mysql.connect()
-    listar_todas_cuentas=conn.cursor()
-    listado_todas_cuentas= Administrador.get_todas_cuentas(listar_todas_cuentas, conn)
-    return render_template('/views/administrador_listar_cuentas.html', listado_todas_cuentas=listado_todas_cuentas)
-
-#Lanza página administrador_listar_usuarios.html
-@app.route('/administrador_listar_usuarios', methods=['GET'])
-def administrador_listar_usuarios():
-    conn= mysql.connect()
-    listar_usuarios=conn.cursor()
-    listado_usuarios=Usuario.get_usuarios(listar_usuarios, conn)
-    return render_template('/views/administrador_listar_usuarios.html', listado_usuarios = listado_usuarios)
-
-#Lanza página administrador_listar_movimientos.html
-@app.route('/administrador_listar_movimientos')
-def administrador_listar_movimientos():
-    return render_template('/views/administrador_listar_movimientos.html')
-
-#Lanza página administrador_modificar_datos_cliente.html
-@app.route('/administrador_modificar_datos_cliente')
-def administrador_modificar_datos_cliente():
-    return render_template('/views/administrador_modificar_datos_cliente.html')
-
-#Lanza página administrador_ver_comisiones.html
-@app.route('/administrador_ver_comisiones')
-def administrador_ver_comisiones():
-    return render_template('/views/administrador_ver_comisiones.html')
-
-#Lanza página index.html para salir
-@app.route('/login')
-def administrador_salir():
-    return render_template('views/login.html')
 
 #Execute APP
 if __name__== '__main__':
