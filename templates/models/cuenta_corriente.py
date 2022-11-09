@@ -1,5 +1,6 @@
 from flask import render_template
 from  templates.models.cuentas import Cuenta
+import random as rd
 
 class Cuenta_corriente(Cuenta):
 
@@ -32,6 +33,7 @@ class Cuenta_corriente(Cuenta):
         pass
 
     def set_crear_cuenta_corriente_pesos(cursor, conn, usuario):
-        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 3, %s)",(usuario))
+        cbu = rd.randint(90000000,99999999)
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 3, %s)",(cbu, usuario))
         conn.commit()
         return render_template('/views/main_page.html')

@@ -1,5 +1,6 @@
 from flask import render_template
 from templates.models.cuentas import Cuenta
+import random as rd
 
 class Caja_ahorro_comun(Cuenta):
 
@@ -59,7 +60,8 @@ class Caja_ahorro_comun(Cuenta):
         # numero_cuenta_ultimo = numero_cuenta_ultimo + 3
         # print(numero_cuenta_ultimo)
         # cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s, NOW(), 1)",(numero_cuenta_ultimo))
-        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES ('20562786', 0, 1, 1, %s)",(usuario))
+        cbu = rd.randint(90000000,99999999)
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 1, %s)",(cbu, usuario))
         conn.commit()
         return render_template('/views/main_page.html')
 

@@ -11,6 +11,7 @@ from templates.models.caja_ahorro_comun import *
 from templates.models.cuentas import *
 from templates.models.administrador import *
 from templates.models.cuenta_corriente import*
+from templates.models.cuenta_corriente_dolares import*
 from app_administrador import app_administrador
 from database import mysql
 
@@ -86,15 +87,26 @@ def crear_cuenta_caja_ahorro():
     caja_ahorro_com=conn.cursor()
     Caja_ahorro_comun.set_crear_cuenta_caja_ahorro(caja_ahorro_com ,conn, id_usuario_login[0])
 
-    return render_template('/views/crear_cuenta.html')
+    return render_template('/views/main_page.html')
+
+@app.route('/volver', methods=['GET'])
+def volver():
+    return render_template('/views/main_page.html')
 
 @app.route('/crear_cuenta_corriente_pesos', methods=['GET'])
 def crear_cuenta_corriente_pesos():
     conn= mysql.connect()
     cuenta_corriente_pesos=conn.cursor()
     Cuenta_corriente.set_crear_cuenta_corriente_pesos(cuenta_corriente_pesos ,conn, id_usuario_login[0])
+    return render_template('/views/main_page.html')
 
-    return render_template('/views/crear_cuenta.html')
+@app.route('/crear_cuenta_corriente_dolares', methods=['GET'])
+def crear_cuenta_corriente_dolares():
+    conn= mysql.connect()
+    cuenta_corriente_pesos=conn.cursor()
+    Cuenta_corriente_dolares.set_crear_cuenta_corriente_dolares(cuenta_corriente_pesos ,conn, id_usuario_login[0])
+
+    return render_template('/views/main_page.html')
 
 #Lanza página listar_cuentas.html
 @app.route('/listar_cuentas', methods=['GET'])
