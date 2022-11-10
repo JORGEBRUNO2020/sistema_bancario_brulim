@@ -4,8 +4,12 @@ class Banco():
     def __init__(self, nombre):
         self.__nombre = nombre
 
-    def get_Nombre(self):
-        return self.__nombre
+    # def get_Nombre(self, cursor, conn, _usuario, _password):
+    #     cursor.execute('select  du.nombre, du.apellido, du.razon_social	from usuario us	join datos_usuario du on us.id = du.usuario_id join cuenta ca on ca.usuario_id = us.id where lg.nombre_usuario=%s',(_usuario))
+    #     password=cursor.fetchall()
+    #     print(password)
+    #     conn.commit()
+    #     return password[1]
 
     def validar_login(cursor, conn, _usuario, _password):
         validacion = []
