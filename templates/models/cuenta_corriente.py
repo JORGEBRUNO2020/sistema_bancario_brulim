@@ -1,6 +1,7 @@
 from flask import render_template
 from  templates.models.cuentas import Cuenta
 import random as rd
+from datetime import datetime
 
 class Cuenta_corriente(Cuenta):
 
@@ -36,4 +37,12 @@ class Cuenta_corriente(Cuenta):
         cbu = rd.randint(90000000,99999999)
         cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 3, %s)",(cbu, usuario))
         conn.commit()
+        cursor.execute('SELECT max(numero_cuenta) FROM cuenta') 
+        ultimo = cursor.fetchall()
+        cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(ultimo, datetime.now()))
+        conn.commit()
         return render_template('/views/main_page.html')
+
+
+
+    

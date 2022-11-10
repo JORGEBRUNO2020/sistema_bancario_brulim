@@ -2,6 +2,7 @@ from  templates.models.cuentas import Cuenta
 from  templates.models.cuenta_corriente import Cuenta_corriente
 from flask import render_template
 import random as rd
+from datetime import datetime
 
 class Cuenta_corriente_dolares(Cuenta_corriente ,Cuenta):
 
@@ -38,11 +39,12 @@ class Cuenta_corriente_dolares(Cuenta_corriente ,Cuenta):
         pass
 
     def set_crear_cuenta_corriente_dolares(cursor, conn, usuario):
-        # numero_cuenta_ultimo = cursor.execute("SELECT max(cuenta_numero_cuenta) FROM datos_cuenta")
-        # numero_cuenta_ultimo = numero_cuenta_ultimo + 3
-        # print(numero_cuenta_ultimo)
-        # cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s, NOW(), 1)",(numero_cuenta_ultimo))
+
         cbu = rd.randint(90000000,99999999)
-        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 5, %s)",(cbu ,usuario))
+        cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 5, %s)",(cbu, usuario))
+        conn.commit()
+        cursor.execute('SELECT max(numero_cuenta) FROM cuenta') 
+        ultimo = cursor.fetchall()
+        cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(ultimo, datetime.now()))
         conn.commit()
         return render_template('/views/main_page.html')

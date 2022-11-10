@@ -2,6 +2,7 @@ from flask import render_template
 from templates.models.cuentas import Cuenta
 import random as rd
 from datetime import datetime
+
 class Caja_ahorro_comun(Cuenta):
 
     def __init__(self, titular, sucursal, numero_cuenta, cbu, fecha_apertura, saldo, tipo):
@@ -55,18 +56,15 @@ class Caja_ahorro_comun(Cuenta):
                 store_resultados.append(item)
         return store_resultados
 
-    def set_crear_cuenta_caja_ahorro(cursor, conn, usuario): #insert into sistema_bancario.datos_cuenta (fecha_apertura, estado) values (CURDATE(),1)
-        numero_cuenta_ultimo = cursor.execute("SELECT max(cuenta_numero_cuenta) FROM datos_cuenta") 
-        print(numero_cuenta_ultimo)
-        
-
-
-        numero_cuenta_ultimo = numero_cuenta_ultimo +10000
-        conn.commit()
-        cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(numero_cuenta_ultimo , datetime.now()))
+    def set_crear_cuenta_caja_ahorro(cursor, conn, usuario):
         cbu = rd.randint(90000000,99999999)
-        conn.commit()
         cursor.execute("insert into cuenta (cbu, saldo, sucursal_id, tipo_cuenta_id, usuario_id) VALUES (%s, 0, 1, 1, %s)",(cbu, usuario))
         conn.commit()
+        cursor.execute('SELECT max(numero_cuenta) FROM cuenta') 
+        ultimo = cursor.fetchall()
+        print(ultimo)
+        cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(ultimo, datetime.now()))
+        conn.commit()
+
         return render_template('/views/main_page.html')
 
