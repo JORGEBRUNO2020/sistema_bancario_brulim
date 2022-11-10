@@ -2,7 +2,11 @@
     {% include '/views/header.html' %}
     
         <div class="content">
-    
+            <label for="inputNombre" class="sr-only">Monto a transferir $</label>
+                <input type="text"  name="transferir" id="transferir" class="form-control" placeholder="Monto a transferir $" required autofocus style="width: 300px;">
+                <label for="inputNombre" class="sr-only">N° cuenta destino</label>
+                <input type="text"  name="destino" id="destino" class="form-control" placeholder="N° cuenta destino" required autofocus style="width: 300px;">
+                <button class="btn btn-lg btn-secondary btn-block" type="submit" style="width: 300px;">Enviar</button>
         </div>
     
     
