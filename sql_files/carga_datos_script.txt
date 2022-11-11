@@ -56,6 +56,12 @@ INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comisio
 VALUES('Depósito Caja Ahorro', 400);
 INSERT INTO sistema_bancario.movimiento_comision (nombre_comision, costo_comision)
 VALUES('Depósito Caja Ahorro SR', 0);
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Apertura cuenta', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Deposito Cuenta Corriente Pesos', 50)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Deposito Cuenta Corriente Dólares', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Caja Ahoorro ', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Cuenta Corriente Dólares', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Cuenta Corriente Pesos', 80)
 
 INSERT INTO sistema_bancario.moneda (nombre, pais, precio_compra, precio_venta)
 VALUES('Peso', 'Argentina', 1, 1);

@@ -36,7 +36,7 @@ CREATE TABLE `cuenta` (
   CONSTRAINT `cuenta_sucursal` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursal` (`id`),
   CONSTRAINT `cuenta_tipo_cuenta` FOREIGN KEY (`tipo_cuenta_id`) REFERENCES `tipo_cuenta` (`id`),
   CONSTRAINT `cuenta_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `cuenta` (
 
 LOCK TABLES `cuenta` WRITE;
 /*!40000 ALTER TABLE `cuenta` DISABLE KEYS */;
-INSERT INTO `cuenta` VALUES (1,'2326353521',500.00,1,1,1),(2,'2056233694',6500.00,1,3,1);
+INSERT INTO `cuenta` VALUES (1,'2326353521',500.00,1,1,1),(2,'2056233694',6500.00,1,3,1),(3,'20562786',0.00,1,1,2),(4,'20562786',0.00,1,1,2);
 /*!40000 ALTER TABLE `cuenta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ CREATE TABLE `datos_cuenta` (
 
 LOCK TABLES `datos_cuenta` WRITE;
 /*!40000 ALTER TABLE `datos_cuenta` DISABLE KEYS */;
-INSERT INTO `datos_cuenta` VALUES (1,'2022-10-10',1),(2,'2022-06-08',1);
+INSERT INTO `datos_cuenta` VALUES (1,'2022-10-10',1),(2,'2022-06-08',1),(3,'2022-11-04',1);
 /*!40000 ALTER TABLE `datos_cuenta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `movimiento_comision` (
   `nombre_comision` varchar(40) NOT NULL,
   `costo_comision` decimal(6,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `movimiento_comision` (
 
 LOCK TABLES `movimiento_comision` WRITE;
 /*!40000 ALTER TABLE `movimiento_comision` DISABLE KEYS */;
-INSERT INTO `movimiento_comision` VALUES (1,'Mantenimiento Caja Ahorro',200.00),(2,'Mantenimiento Caja Ahorro SR',0.00),(3,'Transferencia Caja Ahorro',60.00),(4,'Transferencia Caja Ahorro SR',0.00),(5,'Depósito Caja Ahorro',400.00),(6,'Depósito Caja Ahorro SR',0.00);
+INSERT INTO `movimiento_comision` VALUES (1,'Mantenimiento Caja Ahorro',200.00),(2,'Mantenimiento Caja Ahorro SR',0.00),(3,'Transferencia Caja Ahorro',60.00),(4,'Transferencia Caja Ahorro SR',0.00),(5,'Depósito Caja Ahorro',400.00),(6,'Depósito Caja Ahorro SR',0.00),(7,'Apertura cuenta',0.00),(8,'Deposito Cuenta Corriente Pesos',50.00),(9,'Deposito Cuenta Corriente Dólares',0.00),(10,'Extracción Caja Ahoorro ',0.00),(11,'Extracción Cuenta Corriente Dólares',0.00);
 /*!40000 ALTER TABLE `movimiento_comision` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,4 +333,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-25  2:39:46
+-- Dump completed on 2022-11-11  0:29:39
