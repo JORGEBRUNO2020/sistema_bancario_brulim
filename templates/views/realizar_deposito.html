@@ -1,42 +1,13 @@
 <div class="page-container">
     {% include '/views/header.html' %}
     
-        <!-- <div class="content">
+        <div class="content">
             <form enctype="multipart/form-data" action='/realizar_deposito' methods="post">
                 <label for="inputdeposito" class="sr-only">Monto $</label>
                 <input type="text" name="deposito" id="deposito" class="form-control" placeholder="deposito" required autofocus style="width: 300px;">
                 <button class="btn btn-lg btn-secondary btn-block" type="submit" style="width: 300px;">Enviar</button>
             </form>
-        </div> -->
-
-
-
-
-        <div>
-            <h1 class="h3 mb-3 font-weight-bolder" style="color: black; text-shadow: 2px 2px #5d5c5c; text-align: center">Ingrese los Datos</h1>
-            <label for="inputEmail" class="sr-only"></label>
-            <form enctype="multipart/form-data" action='/administrador_cargar_cliente_individuo' method="get">
-                <label for="inputcuit_cuil" class="sr-only">Cuit_cuit</label>
-                <input type="number" name="cuit_cuil" id="cuit_cuil" class="form-control" placeholder="CUIL/CUIT" required autofocus style="width: 300px;">
-                <label for="inputdni" class="sr-only">D.N.I.</label>
-                <input type="text" name="dni" id="dni" class="form-control" placeholder="DNI" required autofocus style="width: 300px;">
-                <label for="inputNombre" class="sr-only">Nombre</label>
-                <input type="text"  name="nombre" id="nombre" class="form-control" placeholder="Nombre" required autofocus style="width: 300px;">
-                <label for="inputApellido" class="sr-only">Apellido</label>
-                <input type="text"  name="apellido" id="apellido" class="form-control" placeholder="Apellido" required autofocus style="width: 300px;">
-                <label for="inputTelefono" class="sr-only">Telefono</label>
-                <input type="text"  name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required autofocus style="width: 300px;">
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="text"  name="email" id="email" class="form-control" placeholder="Email" required autofocus style="width: 300px;">
-                <label for="inputusuario" class="sr-only">Usuario</label>
-                <input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus style="width: 300px;">
-                <label for="inputpassword" class="sr-only">Password</label>
-                <input type="text"  name="password" id="password" class="form-control" placeholder="Password" required autofocus style="width: 300px;">
-          
-                <button class="btn btn-lg btn-secondary btn-block" type="submit" style="width: 300px;">Enviar</button>
-            </form>
         </div>
-    
     
     {% include '/views/footer.html' %}
 </div>
