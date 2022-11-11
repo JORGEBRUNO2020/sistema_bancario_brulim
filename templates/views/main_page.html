@@ -1,35 +1,56 @@
+<style>
+    .opciones {
+        text-align: center;
+        border-radius: 18px;
+        color: rgb(97, 94, 94);
+        text-shadow: 2px 2px 5px black;
+        font-size: 24px;
+    }
+    .datos_texto{
+        text-align: center; 
+    }
+    .datos_numeros{
+        text-align: right; 
+    }
+    .titulos2 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 40px;
+    }
+</style>
 <div class="page-container">
     {% include '/views/header.html' %}
     
         <div class="content">
-            BIENVENIDO
+            <div class="titulos2">BIENVENIDO</div>
+            
         
             <body>
 
-                <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/crear_cuenta'>
+                <form class="opciones  mb-3 font-weight-bolder"  method="get" action='/crear_cuenta'>
                 <a class="nav-link" href='/crear_cuenta'></a>
-                <input type="submit" value="Crear Cuenta" />
+                <input type="submit" value="   Crear Cuenta   " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder" method="get" action='/listar_cuentas'>
-                <input type="submit" value="Ver Cuentas" />
+                <form class="opciones  mb-3 font-weight-bolder" method="get" action='/listar_cuentas'>
+                <input type="submit" value="    Ver Cuentas    " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder" method="get" action='/listar_saldos'>
-                <input type="submit" value="Saldos" />
+                <form class="opciones  mb-3 font-weight-bolder" method="get" action='/listar_saldos'>
+                <input type="submit" value="         Saldos         " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/listar_movimientos'>
-                <input type="submit" value="Movimientos" />
+                <form class="opciones  mb-3 font-weight-bolder"  method="get" action='/listar_movimientos'>
+                <input type="submit" value="   Movimientos   " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/realizar_deposito'>
-                <input type="submit" value="Depositar" />
+                <form class="opciones  mb-3 font-weight-bolder"  method="get" action='/realizar_deposito'>
+                <input type="submit" value="      Depositar      " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder" method="get" action='/realizar_transferencia'>
-                <input type="submit" value="Transferir" />
+                <form class="opciones  mb-3 font-weight-bolder" method="get" action='/realizar_transferencia'>
+                <input type="submit" value="      Transferir      " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/realizar_retiro'>
-                <input type="submit" value="Extracción" />
+                <form class="opciones  mb-3 font-weight-bolder"  method="get" action='/realizar_retiro'>
+                <input type="submit" value="     Extracción     " />
                 </form>
-                <form class="titulos h3 mb-3 font-weight-bolder"  method="get" action='/cerrar_cuenta'>
-                <input type="submit" value="Cerrar Cuenta" />
+                <form class="opciones  mb-3 font-weight-bolder"  method="get" action='/cerrar_cuenta'>
+                <input type="submit" value="  Cerrar Cuenta  " />
                 </form>
             
             
