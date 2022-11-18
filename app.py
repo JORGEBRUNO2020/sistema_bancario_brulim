@@ -105,7 +105,6 @@ def crear_cuenta_corriente_dolares():
     conn= mysql.connect()
     cuenta_corriente_pesos=conn.cursor()
     Cuenta_corriente_dolares.set_crear_cuenta_corriente_dolares(cuenta_corriente_pesos ,conn, id_usuario_login[0])
-
     return render_template('/views/main_page.html')
 
 #Lanza página listar_cuentas.html
@@ -114,6 +113,7 @@ def listar_cuentas():
     conn= mysql.connect()
     listar_cuentas=conn.cursor()
     listado_cuentas=Cuenta.get_cuentas(listar_cuentas, conn, id_usuario_login[0])
+    
     return render_template('/views/listar_cuentas.html',listado_cuentas=listado_cuentas )
 
 #Lanza página listar_movimientos.html
@@ -132,6 +132,20 @@ def listar_movimientos():
         print("Exception Occured while code Execution: "+ str(e))
         return render_template('/views/listar_movimientos.html')
 
+
+@app.route('/realizar_deposito/<int:id>', methods = ['POST','GET'])
+def realizar_deposito(id):
+    
+    print("Cuenta" ,id)
+    if request.method == 'POST':
+        _monto = request.form['depositar']
+        conn= mysql.connect()
+        mod_saldo=conn.cursor()
+        Caja_ahorro_comun.set_saldo(mod_saldo, conn, id_usuario_login[0],id, _monto)
+        return render_template('/views/main_page.html')
+    else:
+        return render_template('/views/main_page.html')
+    
 #Lanza página listar_saldos.html
 @app.route('/listar_saldos', methods=['GET'])
 def listar_saldos():
@@ -140,48 +154,24 @@ def listar_saldos():
     cuentas_datos=Caja_ahorro_comun.get_saldo(listar_saldos, conn, id_usuario_login[0])
     return render_template('/views/listar_saldos.html',cuentas_datos=cuentas_datos )
 
-#Lanza página realizar_deposito.html
-
-# @app.route('/realizar_deposito/<int:id>', methods=['GET'])
-# def realizar_deposito(id):
-#     print("Entra" , id)
-#     return render_template('/views/main_page.html')
-  
-
-@app.route('/realizar_deposito/<int:id>', methods =['GET','POST'])
-def realizar_deposito(id):
-    print("Cuenta" , id)
-    conn= mysql.connect()
-    cursor=conn.cursor()
-    if  request.method == 'POST':
-        print("Entra al if")
-        _importe = request.form['deposito']
-        print("depositar", id, " $$ ", _importe)
-        return render_template('/views/realizar_deposito.html')
+#Lanza página realizar_retiro.html
+@app.route('/realizar_retiro/<int:id>', methods=['GET','POST'])
+def realizar_retiro(id):
+    print("Cuenta" ,id)
+    if request.method == 'POST':
+        _monto = request.form['retirar']
+        _monto = 0-int(_monto)
+        conn= mysql.connect()
+        mod_saldo=conn.cursor()
+        Caja_ahorro_comun.set_saldo(mod_saldo, conn, id_usuario_login[0],id, _monto)
+        return render_template('/views/main_page.html')
     else:
-        print("NO entra")
-    return render_template('/views/main_page.html')
-    
+        return render_template('/views/main_page.html')
 
 #Lanza página realizar_transferencial.html
 @app.route('/realizar_transferencia')
 def realizar_transferencia():
     return render_template('/views/realizar_transferencia.html')
-
-#Lanza página realizar_retiro.html
-@app.route('/realizar_retiro/<int:id>', methods=['GET','POST'])
-def realizar_retiro(id):
-    print("Cuenta" , id)
-
-    if  request.method == 'POST':
-        print("Entra al if")
-        _importe = request.form['deposito']
-        print(_importe)
-        print("depositar", id, " $$ ", _importe)
-    else:
-        print("NO entra")
-        return render_template('/views/main_page.html')
-    return render_template('/views/realizar_retiro.html')
 
 #Lanza página cerrar_cuenta.html
 @app.route('/cerrar_cuenta')
@@ -189,15 +179,11 @@ def cerrar_cuenta():
     return render_template('/views/cerrar_cuenta.html')
 
 #Lanza página administrador_cargar_cliente_individuo.html
-@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST'])  #, methods =['POST'] views/index.html  , methods =['GET','POST']
+@app.route('/administrador_cargar_cliente_individuo', methods =['GET','POST']) 
 def administrador_cargar_cliente_individuo():  
-    print("Entra a cargar")
-
     conn= mysql.connect()
     cursor=conn.cursor()
     if  request.method == 'POST':
-        print("Entra al if")
-
         _cuitcuil = request.form['cuit_cuil']
         _dni = request.form['dni']
         _nombre = request.form['nombre']

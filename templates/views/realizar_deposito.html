@@ -1,13 +1,21 @@
 <div class="page-container">
     {% include '/views/header.html' %}
     
-        <div class="content">
+        <!-- <div class="content">
             <form enctype="multipart/form-data" action='/realizar_deposito' methods="post">
                 <label for="inputdeposito" class="sr-only">Monto $</label>
-                <input type="text" name="deposito" id="deposito" class="form-control" placeholder="deposito" required autofocus style="width: 300px;">
+                <input type="text" name="realizar_deposito" id="realizar_deposito" class="form-control" placeholder="DEPOSITAR" required autofocus style="width: 300px;">
                 <button class="btn btn-lg btn-secondary btn-block" type="submit" style="width: 300px;">Enviar</button>
             </form>
-        </div>
+        </div> -->
+        <!-- <div>
+
+            <label for="inputEmail" class="sr-only"></label>
+                <form class="form-signin" action="/realizar_deposito" method='post'>
+                    <input type="" name="depositar" id="depositar" class="form-control" placeholder="INGRESE MONTO $" required autofocus style="width: 300px;">
+                    <button class="btn btn-lg btn-secondary btn-block form-control" type="submit" style="width: 300px;">Aceptar</button>
+                </form>
+        </div> -->
     
     {% include '/views/footer.html' %}
 </div>

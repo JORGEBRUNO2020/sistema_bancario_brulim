@@ -25,7 +25,22 @@ class Caja_ahorro_comun(Cuenta):
         pass
 
     def get_fecha_apertura():
+
         pass
+
+    def set_saldo(mod_saldo,conn, usuario_id, num, monto):
+        usuario_id = usuario_id
+        mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
+        saldo = mod_saldo.fetchall()
+        conn.commit()
+        print(saldo)
+
+        return saldo
+
+
+
+
+       
 
     def get_saldo(listar_saldos, conn, usuario_id):
         usuario_id = usuario_id
