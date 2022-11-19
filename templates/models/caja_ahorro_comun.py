@@ -28,19 +28,14 @@ class Caja_ahorro_comun(Cuenta):
 
         pass
 
-    def set_saldo(mod_saldo,conn, usuario_id, num, monto):
+    def set_saldo(modificacion_saldo,conn, usuario_id, numero_cuenta, monto):
         usuario_id = usuario_id
-        mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
-        saldo = mod_saldo.fetchall()
+        modificacion_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, numero_cuenta))
+        saldo = modificacion_saldo.fetchall()
         conn.commit()
         print(saldo)
 
         return saldo
-
-
-
-
-       
 
     def get_saldo(listar_saldos, conn, usuario_id):
         usuario_id = usuario_id
@@ -80,6 +75,5 @@ class Caja_ahorro_comun(Cuenta):
         print(ultimo)
         cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(ultimo, datetime.now()))
         conn.commit()
-
         return render_template('/views/main_page.html')
 
