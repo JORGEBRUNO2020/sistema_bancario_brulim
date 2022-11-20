@@ -29,19 +29,28 @@ class Caja_ahorro_comun(Cuenta):
         pass
 
     def set_saldo(mod_saldo,conn, usuario_id, num, monto):
-        usuario_id = usuario_id
-        mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
-        saldo = mod_saldo.fetchall()
-        conn.commit()
-        print(saldo)
+        monto = int(monto)
+        print(monto)
+        if monto >= 0:
+            usuario_id = usuario_id
+            mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
+            saldo = mod_saldo.fetchall()
+            conn.commit()
+            return saldo
 
-        return saldo
-
-
-
-
+        else:
+            mod_saldo.execute('select cu.saldo from cuenta cu where cu.numero_cuenta = %s', (num))
+            saldo = mod_saldo.fetchall()
+            saldo_disponible  = saldo[0][0]
+            saldo_disponible = float(saldo_disponible)
+            print(saldo_disponible)
+            if (saldo_disponible + monto) >= 0:
+                usuario_id = usuario_id
+                mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
+                saldo = mod_saldo.fetchall()
+                conn.commit()
+                return saldo
        
-
     def get_saldo(listar_saldos, conn, usuario_id):
         usuario_id = usuario_id
         listar_saldos.execute('select * from usuario us join datos_usuario du on us.id = du.usuario_id join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id where us.id =%s order by cu.numero_cuenta asc',(usuario_id))
