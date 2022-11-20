@@ -135,8 +135,10 @@ def listar_movimientos():
 
 @app.route('/realizar_deposito/<int:id>', methods = ['POST','GET'])
 def realizar_deposito(id):
-    
-    print("Cuenta" ,id)
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    if Banco.validar_user(cursor, conn,id_usuario_login) == False: 
+        return render_template('/views/login.html')
     if request.method == 'POST':
         _monto = request.form['depositar']
         conn= mysql.connect()
@@ -157,7 +159,10 @@ def listar_saldos():
 #Lanza página realizar_retiro.html
 @app.route('/realizar_retiro/<int:id>', methods=['GET','POST'])
 def realizar_retiro(id):
-    print("Cuenta" ,id)
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    if Banco.validar_user(cursor, conn,id_usuario_login) == False: 
+        return render_template('/views/login.html')
     if request.method == 'POST':
         _monto = request.form['retirar']
         _monto = 0-int(_monto)

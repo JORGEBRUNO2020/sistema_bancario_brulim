@@ -37,7 +37,6 @@ class Caja_ahorro_comun(Cuenta):
             saldo = mod_saldo.fetchall()
             conn.commit()
             return saldo
-
         else:
             mod_saldo.execute('select cu.saldo from cuenta cu where cu.numero_cuenta = %s', (num))
             saldo = mod_saldo.fetchall()
@@ -86,7 +85,6 @@ class Caja_ahorro_comun(Cuenta):
         conn.commit()
         cursor.execute('SELECT max(numero_cuenta) FROM cuenta') 
         ultimo = cursor.fetchall()
-        print(ultimo)
         cursor.execute("INSERT INTO datos_cuenta ( cuenta_numero_cuenta, fecha_apertura, estado) VALUES(%s,%s, 1)",(ultimo, datetime.now()))
         conn.commit()
         return render_template('/views/main_page.html')

@@ -38,5 +38,15 @@ class Banco():
         else :
             return True
 
+    def validar_user(cursor, conn,id_usuario_login):
+        cursor.execute("select lg.nombre_usuario, lg.password, us.id, us.estado, tu.usuario_tipo from login lg join usuario us on lg.usuario_id = us.id join tipo_usuario tu on tu.id = us.tipo_usuario_id where us.id=%s",(id_usuario_login))
+        datos_usuario=cursor.fetchall()
+        conn.commit()
+        if (datos_usuario[0][4]) == 'Administrador':
+            return False
+        else :
+            return True
+
+
 
 
