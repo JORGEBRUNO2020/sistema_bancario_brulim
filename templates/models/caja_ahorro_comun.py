@@ -29,12 +29,14 @@ class Caja_ahorro_comun(Cuenta):
         pass
 
     def set_saldo(mod_saldo,conn, usuario_id, num, monto):
-        monto = int(monto)
-        print(monto)
+        monto = int(monto)   
         if monto >= 0:
             usuario_id = usuario_id
             mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
+
             saldo = mod_saldo.fetchall()
+            conn.commit()
+            mod_saldo.execute('INSERT INTO transaccion (monto, fecha_movimiento, cuenta_numero_cuenta, moneda_id, movimiento_comision_id) VALUES(%s, %s, %s, 1, NULL)',(monto, datetime.now(),num))
             conn.commit()
             return saldo
         else:

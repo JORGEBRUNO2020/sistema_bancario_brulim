@@ -506,7 +506,7 @@ join usuario us on lg.usuario_id = us.id
 join tipo_usuario tu on tu.id = us.tipo_usuario_id  
 
 
-select * from cuenta c 
+select * from datos_cuenta
 
 select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad  from usuario us 
 join cuenta cu on us.id = cu.usuario_id join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id 
@@ -521,4 +521,36 @@ join cuenta ca on ca.usuario_id = us.id
 join tipo_cuenta tc on ca.tipo_cuenta_id = tc.id  
 order by ca.numero_cuenta asc
 
+SELECT max(cuenta_numero_cuenta) FROM datos_cuenta
 
+INSERT INTO sistema_bancario.datos_cuenta
+(cuenta_numero_cuenta, fecha_apertura, estado)
+VALUES(3, '2022-11-04', 1);
+
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Apertura cuenta', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Deposito Cuenta Corriente Pesos', 50)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Deposito Cuenta Corriente Dólares', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Caja Ahoorro ', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Cuenta Corriente Dólares', 0)
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Cuenta Corriente Pesos', 80)
+
+select * from movimiento_comision mc 
+
+
+insert into movimiento_comision (nombre_comision, costo_comision) values ('Extracción Cuenta Corriente Pesos',  80)
+
+
+UPDATE sistema_bancario.cuenta
+SET saldo=XXXXXX
+WHERE numero_cuenta=XXXXXXX;
+
+delete from cuenta where numero_cuenta = 3
+
+select cu.cbu, cu.numero_cuenta, cu.sucursal_id, tc.nombre,dc.fecha_apertura, sc.direccion, sc.ciudad, cu.saldo  
+from usuario us 
+join cuenta cu on us.id = cu.usuario_id 
+join tipo_cuenta tc on tc.id = cu.tipo_cuenta_id 
+join sucursal sc on sc.id = cu.sucursal_id 
+join datos_cuenta dc on cu.numero_cuenta = dc.cuenta_numero_cuenta
+where us.id = %s 
+order by cu.numero_cuenta asc
