@@ -121,7 +121,7 @@ def listar_cuentas():
 def listar_movimientos():
     conn= mysql.connect()
     listar_movimientos=conn.cursor()
-    listado_movimientos=Caja_ahorro_comun.get_movimientos(listar_movimientos, conn, id_usuario_login[0])
+    listado_movimientos=Caja_ahorro_comun.get_movimientos(listar_movimientos, conn, int(id_usuario_login[0]))
     try:
         if request.method == 'POST':
             cuenta_movimiento = request.form["cuenta_movimiento"]

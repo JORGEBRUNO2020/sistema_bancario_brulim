@@ -33,7 +33,6 @@ class Caja_ahorro_comun(Cuenta):
         if monto >= 0:
             usuario_id = usuario_id
             mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
-
             saldo = mod_saldo.fetchall()
             conn.commit()
             mod_saldo.execute('INSERT INTO transaccion (monto, fecha_movimiento, cuenta_numero_cuenta, moneda_id, movimiento_comision_id) VALUES(%s, %s, %s, 1, NULL)',(monto, datetime.now(),num))
@@ -50,6 +49,8 @@ class Caja_ahorro_comun(Cuenta):
                 mod_saldo.execute('update cuenta set saldo = saldo + %s where numero_cuenta = %s', (monto, num))
                 saldo = mod_saldo.fetchall()
                 conn.commit()
+                mod_saldo.execute('INSERT INTO transaccion (monto, fecha_movimiento, cuenta_numero_cuenta, moneda_id, movimiento_comision_id) VALUES(%s, %s, %s, 1, NULL)',(monto, datetime.now(),num))
+                conn.commit()
                 return saldo
        
     def get_saldo(listar_saldos, conn, usuario_id):
@@ -64,7 +65,7 @@ class Caja_ahorro_comun(Cuenta):
 
     def get_movimientos(listar_movimientos, conn, usuario_id):
         usuario_id = usuario_id
-        listar_movimientos.execute('select ca.numero_cuenta, ca.tipo_cuenta_id, ts.id, ts.monto, ts.fecha_movimiento, mc.nombre_comision, mc.costo_comision, mo.nombre, mo.precio_compra, mo.precio_venta from transaccion ts join cuenta ca on ts.cuenta_numero_cuenta = ca.numero_cuenta join movimiento_comision mc on mc.id = ts.movimiento_comision_id join moneda mo on mo.id = ts.moneda_id where ts.cuenta_numero_cuenta  =%s',(usuario_id))
+        listar_movimientos.execute('select ca.numero_cuenta, ca.tipo_cuenta_id, ts.id, ts.monto, ts.fecha_movimiento, mo.nombre, mo.precio_compra, mo.precio_venta from transaccion ts join cuenta ca on ts.cuenta_numero_cuenta = ca.numero_cuenta join moneda mo on mo.id = ts.moneda_id where ca.usuario_id =%s',(usuario_id))
         cuenta_movimientos=listar_movimientos.fetchall()
         conn.commit()
         return cuenta_movimientos
